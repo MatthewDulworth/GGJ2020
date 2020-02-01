@@ -27,8 +27,8 @@ public abstract class Enemy : MonoBehaviour
    // States
    // -------------------------------------------------
    protected bool grounded;
-   protected States state;
-   protected enum States
+   protected State state;
+   protected enum State
    {
       hitStun, dead, active, attacking
    }
@@ -39,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public virtual void Start()
    {
-      state = States.active;
+      state = State.active;
       foreach (Transform child in transform)
       {
          if (child.name == "GroundCheck")
@@ -78,7 +78,7 @@ public abstract class Enemy : MonoBehaviour
          {
             this.hitboxPriority = hitbox.priority;
             this.hitstun = hitbox.hitstun;
-            this.state = States.hitStun;
+            this.state = State.hitStun;
 
             float direction = collision.transform.parent.parent.localScale.x;
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
@@ -92,9 +92,13 @@ public abstract class Enemy : MonoBehaviour
       return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude;
    }
 
+
+   // -------------------------------------------------
+   // Handle Hitstun
+   // -------------------------------------------------
    private void handleHitStun()
    {
-      if (state == States.hitStun)
+      if (state == State.hitStun)
       {
          hitstun -= Time.deltaTime;
 
@@ -105,7 +109,7 @@ public abstract class Enemy : MonoBehaviour
          if (hitstun <= 0 && grounded)
          {
             Debug.Log("grounded");
-            state = States.active;
+            state = State.active;
          }
       }
    }

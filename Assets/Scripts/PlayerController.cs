@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    private State state = State.disabled;
+    private State state = State.alive;
     private ControlScheme cntrlSchm;
 
     //Sprite Facing

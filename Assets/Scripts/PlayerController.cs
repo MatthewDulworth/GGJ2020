@@ -194,7 +194,6 @@ public class PlayerController : MonoBehaviour
         Attack attackInputted = null;
         if (Input.GetAxis(cntrlSchm.AttackAxis) > 0)
         {
-            print("Attacked");
             attackInputted = FindAttack("Jab");
         }
         //Upward attack

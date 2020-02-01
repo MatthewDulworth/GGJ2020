@@ -41,7 +41,16 @@ public abstract class Enemy : MonoBehaviour
    }
    public virtual void Update()
    {
-
+      if(state == States.hitStun) 
+      {
+         hitstun -= Time.deltaTime;
+         Debug.Log("stunned");
+         if(hitstun <= 0) {
+            state = States.active;
+            Debug.Log("unstunned");
+            hitboxPriority = -1;
+         }
+      }
    }
 
 
@@ -63,14 +72,17 @@ public abstract class Enemy : MonoBehaviour
             this.hitstun = hitbox.hitstun;
             this.state = States.hitStun;
 
-            float direction = collision.transform.parent.parent.localScale.x;
-            Vector2 hitVector = getHitVector(hitbox.knockbackAngle, hitbox.knockback) * direction;
-            rb.velocity = hitVector;
+            print(hitbox.name + ", " + hitbox.knockback + ", " + hitbox.knockbackAngle + ", " + this.gameObject);
+
+            // float direction = collision.transform.parent.parent.localScale.x;
+            // Vector2 hitVector = getHitVector(hitbox.knockbackAngle, hitbox.knockback) * direction;
+            rb.velocity = Vector2.up * hitbox.knockback * 30;
          }
       }
    }
 
    private Vector2 getHitVector(float magnitude, float angle){
+      angle = Mathf.Deg2Rad * angle;
       return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * magnitude;
    }
 

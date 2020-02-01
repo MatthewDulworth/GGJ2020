@@ -9,8 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942fef30f10bc614bb923ced4b93a524, type: 3}
-  m_Name: Jab 2
+  m_Script: {fileID: 11500000, guid: f3257065a7b794f41a7ae2b8ace7a55c, type: 3}
+  m_Name: Jab HB 1
   m_EditorClassIdentifier: 
-  knockbackAngle: {x: -0.1, y: 0.1}
+  delay: 0
+  knockbackAngle: 225
+  priority: 0
   knockback: 0.1
+  hitstun: 0.1
+  hitboxDuration: 0.1
+  scale: {x: 0.8, y: 0.8}
+  offeset: {x: 0.62, y: 0.18}

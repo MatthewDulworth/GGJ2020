@@ -90,13 +90,14 @@ public class PlayerController : MonoBehaviour
             attacking = CheckAttacking();
             if (!rolling)
             {
+                if (!attacking)
+                {
+                    CheckFlip();
+                    CheckAttack();
+                }
                 if (!(attacking && grounded))
                 {
                     CheckPlayerMovement();
-                }
-                if (!attacking)
-                {
-                    CheckAttack();
                 }
             }
             if (jumpTimer >= 0)
@@ -122,18 +123,6 @@ public class PlayerController : MonoBehaviour
         //Horiz. vert. input 
         float horizontalInput = cntrlSchm.HorizontalInput();
         float verticalInput = cntrlSchm.VerticalInput();
-
-        //Sprite Flip
-        if(horizontalInput < 0 && dir == Direction.right)
-        {
-            dir = Direction.left;
-            Invoke("FlipCharacter", spriteFlipDelay);
-        }
-        else if(horizontalInput > 0 && dir == Direction.left)
-        {
-            dir = Direction.right;
-            Invoke("FlipCharacter", spriteFlipDelay);
-        }
 
         //Walk 
         rb.AddForce(playerSpeed * horizontalInput * transform.right);
@@ -233,7 +222,7 @@ public class PlayerController : MonoBehaviour
     }
     public void FlipCharacter()
     {
-        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
     }
     private Attack FindAttack(string name)
     {
@@ -257,6 +246,24 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void CheckFlip()
+    {
+        //Horiz. vert. input 
+        float horizontalInput = cntrlSchm.HorizontalInput();
+
+        //Sprite Flip
+        if (horizontalInput < 0 && dir == Direction.right)
+        {
+            dir = Direction.left;
+            Invoke("FlipCharacter", spriteFlipDelay);
+        }
+        else if (horizontalInput > 0 && dir == Direction.left)
+        {
+            dir = Direction.right;
+            Invoke("FlipCharacter", spriteFlipDelay);
+        }
     }
 }
 

@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public float rollDuration;
     private bool rolling;    
     private float rollTimer;
+    private bool rollKeyDown;
 
     //Attack Variables
     public GameObject attack;
@@ -76,7 +77,13 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (rolling)
+            {
+                rb.velocity *= 1.5f;
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -170,14 +177,22 @@ public class PlayerController : MonoBehaviour
         }
 
         //Roll
-        if (cntrlSchm.RollPressed() && rollTimer < 0)
+        if (cntrlSchm.RollPressed() && rollTimer < 0 && !rollKeyDown)
         {
             int direction = (dir == Direction.left) ? -1 : 1;
-            rb.velocity = new Vector2(rollSpeed * (direction), rb.velocity.y / 1.5f);
+            rb.velocity = new Vector2(rollSpeed * (direction), rb.velocity.y * 1.5f);
 
             rolling = true;
             rollTimer = rollCooldown;
             Invoke("ResetRoll", rollDuration);
+            rollKeyDown = true;
+        }
+    }
+    private void Update()
+    {
+        if (!cntrlSchm.RollPressed())
+        {
+            rollKeyDown = false;
         }
     }
     private void ResetRoll()

@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
             AttackController attack = collision.gameObject.GetComponent<AttackController>();
         }
     }
-    
+
     // Update is called once per frame
     void Update()
     {

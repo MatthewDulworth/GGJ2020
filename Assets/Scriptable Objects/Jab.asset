@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942fef30f10bc614bb923ced4b93a524, type: 3}
   m_Name: Jab
   m_EditorClassIdentifier: 
-  knockbackAngle: 0
-  knockback: 0.1
-  hitstun: 0.1
   startupTime: 0
-  endLag: 0.1
-  hitboxDuration: 0.2
-  scale: {x: 0.7, y: 0.7}
-  offeset: {x: -0.687, y: 0.119}
+  endLag: 2
+  invincible: 0
+  hitboxes:
+  - {fileID: 11400000, guid: 839c3b3e83bcf91469e9b10adc570f18, type: 2}

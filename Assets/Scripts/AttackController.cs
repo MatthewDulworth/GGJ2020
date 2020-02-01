@@ -5,38 +5,39 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     public Attack attack;
+    public GameObject hitbox;
 
     //Angle at which enemy is hit back at
     private float endLag;
-    private float hitboxDuration;
+    private float maxHitboxDuration;
     private float startupTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.localScale = attack.scale;
-        transform.localPosition = attack.offeset;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //Startup
         startupTime -= Time.deltaTime;
-        if(startupTime <= 0)
+        if (startupTime <= 0)
         {
-            GetComponent<Collider2D>().enabled = true;
-
-            hitboxDuration -= Time.deltaTime;
-            if(hitboxDuration <= 0)
+            //Any hitbox times
+            maxHitboxDuration -= Time.deltaTime;
+            if (maxHitboxDuration <= 0)
             {
-                GetComponent<Collider2D>().enabled = false;
+
+                //EndLag
                 endLag -= Time.deltaTime;
+                if (endLag <= 0)
+                {
+                    Die();
+                }
             }
             
-            if (endLag <= 0)
-            {
-                Die();
-            }
         }
     }
     //Assigns all values in controller through attack scriptable
@@ -44,8 +45,21 @@ public class AttackController : MonoBehaviour
     {
         attack = inAttack;
         endLag = attack.endLag;
-        hitboxDuration = attack.hitboxDuration;
         startupTime = attack.startupTime;
+
+        foreach(Hitbox e in inAttack.hitboxes)
+        {
+            if(e.delay + e.hitboxDuration > maxHitboxDuration)
+            {
+                maxHitboxDuration = e.delay + e.hitboxDuration;
+            }
+            StartCoroutine(SpawnHitbox(e, startupTime + e.delay));
+        }
+    }
+    IEnumerator SpawnHitbox(Hitbox hb, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Instantiate(hb, transform);
     }
 
     //Will destroy this attack object. Includes any effects

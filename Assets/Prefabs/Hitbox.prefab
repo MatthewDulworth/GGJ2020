@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8683797777638527169}
   - component: {fileID: 4567323610589480454}
   - component: {fileID: 7490508164801285082}
-  - component: {fileID: 2932978803103652021}
-  m_Layer: 8
+  - component: {fileID: -8411313715476774779}
+  m_Layer: 10
   m_Name: Basic Attack
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5513489440620722005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8529053, y: 1.750473, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 0}
---- !u!58 &2932978803103652021
-CircleCollider2D:
+--- !u!70 &-8411313715476774779
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,9 +105,9 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0

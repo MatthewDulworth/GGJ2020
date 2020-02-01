@@ -24,11 +24,7 @@ public class ControlScheme : MonoBehaviour
     {
         contr0 = 0, contr1 = 1, contr2 = 2, contr3 = 3, keyboard = 4
     }
-    public ControlScheme(Controller controller)
-    {
-        SetControlScheme(controller);
-    }
-    public void SetControlScheme(Controller controller)
+    public void SetControlScheme()
     {
         string inputAxisName = "";
 

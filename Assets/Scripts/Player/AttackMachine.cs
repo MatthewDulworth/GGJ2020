@@ -9,9 +9,10 @@ public class AttackMachine
    // -------------------------------------------------
    public Attack CurrentAttack { get; private set; }
    public Attack LastAttack { get; private set; }
+   public bool Attacking { get; private set; }
    private ControlScheme controlScheme;
    private Attack[] attacks;
-   private bool attacking = false;
+
 
    // -------------------------------------------------
    // Constructor
@@ -30,16 +31,19 @@ public class AttackMachine
    // -------------------------------------------------
    public void Update(bool grounded)
    {
+      this.Attacking = false;
       bool attackPressed = Input.GetAxis(controlScheme.AttackAxis) > 0;
       float vertical = Input.GetAxis(controlScheme.VerticalAxis);
 
       if (grounded && attackPressed)
       {
          HandleTilts(vertical);
+         this.Attacking = true;
       }
       else if (!grounded && attackPressed)
       {
          HandleAerials(vertical);
+         this.Attacking = true;
       }
    }
 
@@ -51,7 +55,7 @@ public class AttackMachine
       if (vertical > 0)
       {
          UpdateAttack("UpTilt");
-      } 
+      }
       else if (vertical < 0)
       {
          UpdateAttack("DownTilt");

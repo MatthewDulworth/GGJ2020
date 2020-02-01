@@ -239,14 +239,14 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    public void CheckAttack()
    {  
-      // attackMachine.Update(grounded);
+      attackMachine.Update(grounded);
 
-      // if (true)
-      // {
-      //    attacking = true;
-      //    var spawnedAttack = Instantiate(attack, transform);
-      //    spawnedAttack.GetComponent<AttackController>().SetAttack(attackInputted);
-      // }
+      if(attackMachine.Attacking)
+      {
+         attacking = true;
+         var spawnedAttack = Instantiate(attack, transform);
+         spawnedAttack.GetComponent<AttackController>().SetAttack(attackMachine.CurrentAttack);
+      }
    }
 
    //Is the player attacking?

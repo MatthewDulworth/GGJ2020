@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 942fef30f10bc614bb923ced4b93a524, type: 3}
-  m_Name: Down Tilt
+  m_Name: UpTilt
   m_EditorClassIdentifier: 
-  startupTime: 0
-  endLag: 0
+  startupTime: 0.2
+  endLag: 0.3
   invincible: 0
-  hitboxes: []
+  hitboxes:
+  - {fileID: 11400000, guid: 7a9f163477fa5cb42bdcc051d16063e6, type: 2}
+  - {fileID: 11400000, guid: d8ba246930434884fb7dd7932f8617de, type: 2}

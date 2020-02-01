@@ -15,9 +15,10 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    // Protected Variables
    // -------------------------------------------------
-   protected int hitStunPriority = -1;
-   protected float hitStunTimer = 0;
+   protected int hitboxPriority = -1;
+   protected float hitstun = 0;
    protected int direction = 1;
+   protected Rigidbody2D rb;
 
 
    // -------------------------------------------------
@@ -36,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
    public virtual void Start()
    {
       state = States.active;
+      rb = GetComponent<Rigidbody2D>();
    }
    public virtual void Update()
    {
@@ -53,10 +55,23 @@ public abstract class Enemy : MonoBehaviour
    {
       if (collision.gameObject.tag == "Attack")
       {
-         AttackController attack = collision.gameObject.GetComponent<AttackController>();
-         Debug.Log("Enemy Attacked");
-         hitStunPriority++;
+         Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
+
+         if (hitbox.priority > this.hitboxPriority)
+         {
+            this.hitboxPriority = hitbox.priority;
+            this.hitstun = hitbox.hitstun;
+            this.state = States.hitStun;
+
+            float direction = collision.transform.parent.parent.localScale.x;
+            Vector2 hitVector = getHitVector(hitbox.knockbackAngle, hitbox.knockback) * direction;
+            rb.velocity = hitVector;
+         }
       }
+   }
+
+   private Vector2 getHitVector(float magnitude, float angle){
+      return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * magnitude;
    }
 
 

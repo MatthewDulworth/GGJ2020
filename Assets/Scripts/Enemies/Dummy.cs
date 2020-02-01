@@ -9,7 +9,6 @@ public class Dummy : Enemy
    // -------------------------------------------------
    [SerializeField] private float maxWanderDist;
    [SerializeField] private float maxChoiceTime;
-   private Rigidbody2D rb;
    private Vector3 startPos;
    private float choiceTimer = 0;
 
@@ -20,7 +19,6 @@ public class Dummy : Enemy
    {
       base.Start();
       startPos = this.transform.position;
-      rb = GetComponent<Rigidbody2D>();
    }
    public override void Update()
    {

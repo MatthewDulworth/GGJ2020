@@ -31,11 +31,11 @@ public class Dummy : Enemy
    // -------------------------------------------------
    public override void handleMovement()
    {
-      if (state == States.active)
+      if (state == State.active)
       {
         // Wander();
       }
-      else if (state != States.hitStun)
+      else if (state != State.hitStun)
       {
          rb.velocity = Vector2.zero;
       }

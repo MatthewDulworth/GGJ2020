@@ -33,11 +33,11 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    // MonoBehaviour
    // -------------------------------------------------
-   public virtual void Start() 
-   { 
+   public virtual void Start()
+   {
       state = States.active;
    }
-   public virtual void Update() 
+   public virtual void Update()
    {
 
    }
@@ -54,7 +54,7 @@ public abstract class Enemy : MonoBehaviour
       if (collision.gameObject.tag == "Attack")
       {
          AttackController attack = collision.gameObject.GetComponent<AttackController>();
-         
+         Debug.Log("Enemy Attacked");
          hitStunPriority++;
       }
    }

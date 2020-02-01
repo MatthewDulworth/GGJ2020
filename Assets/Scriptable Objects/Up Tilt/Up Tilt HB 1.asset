@@ -15,7 +15,7 @@ MonoBehaviour:
   delay: 0
   knockbackAngle: 45
   knockback: 0.5
-  priority: 0
+  priority: 2
   hitstun: 1
   hitboxDuration: 0.2
   scale: {x: 0.8, y: 1}

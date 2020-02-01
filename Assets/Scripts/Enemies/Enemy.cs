@@ -89,7 +89,7 @@ public abstract class Enemy : MonoBehaviour
    private Vector2 getHitVector(float magnitude, float angle, float direction)
    {
       angle *= -Mathf.Deg2Rad;
-      return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude * 30;
+      return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude;
    }
 
    private void handleHitStun()

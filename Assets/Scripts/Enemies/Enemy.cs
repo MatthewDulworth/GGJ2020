@@ -5,23 +5,43 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
    // -------------------------------------------------
-   // Variables
+   // Editor Variables
    // -------------------------------------------------
    [SerializeField] protected float health;
    [SerializeField] protected float walkSpeed;
-   public int healthBar;
+   [SerializeField] int healthBar;
 
+
+   // -------------------------------------------------
+   // Protected Variables
+   // -------------------------------------------------
+   protected int hitStunPriority = -1;
+   protected float hitStunTimer = 0;
+   protected int direction = 1;
+
+
+   // -------------------------------------------------
+   // States
+   // -------------------------------------------------
    protected States state;
    protected enum States
    {
       hitStun, dead, active, attacking
    }
 
+
    // -------------------------------------------------
    // MonoBehaviour
    // -------------------------------------------------
-   void Start() { }
-   void Update() { }
+   public virtual void Start() 
+   { 
+      state = States.active;
+   }
+   public virtual void Update() 
+   {
+
+   }
+
 
    // -------------------------------------------------
    // public methods
@@ -34,7 +54,8 @@ public abstract class Enemy : MonoBehaviour
       if (collision.gameObject.tag == "Attack")
       {
          AttackController attack = collision.gameObject.GetComponent<AttackController>();
-         Debug.Log("attacked");
+         
+         hitStunPriority++;
       }
    }
 
@@ -44,4 +65,5 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public float Health { get => health; }
    public float WalkSpeed { get => walkSpeed; }
+   public float HealthBar { get => healthBar; }
 }

@@ -10,18 +10,23 @@ public class Dummy : Enemy
    [SerializeField] private float maxWanderDist;
    [SerializeField] private float maxChoiceTime;
    private Rigidbody2D rb;
-   private Vector3 startLocation;
+   private Vector3 startPos;
    private float choiceTimer = 0;
 
    // -------------------------------------------------
    // MonoBehaviour
    // -------------------------------------------------
-   void Start()
+   public override void Start()
    {
-      startLocation = this.transform.position;
-      state = States.active;
+      base.Start();
+      startPos = this.transform.position;
+      rb = GetComponent<Rigidbody2D>();
    }
-   void Update() { }
+   public override void Update()
+   {
+      base.Update();
+      handleMovement();
+   }
 
    // -------------------------------------------------
    // public methods
@@ -30,9 +35,10 @@ public class Dummy : Enemy
    {
       if (state == States.active)
       {
-         // Wander();
+         Wander();
       }
-      else if(state != States.hitStun) {
+      else if (state != States.hitStun)
+      {
          rb.velocity = Vector2.zero;
       }
    }
@@ -47,12 +53,31 @@ public class Dummy : Enemy
    // -------------------------------------------------
    private void Wander()
    {
-      choiceTimer -= Time.deltaTime * Random.Range(0.5f, 1);
-      if (choiceTimer <= 0)
-      {
-         choiceTimer = maxChoiceTime;
-         int direction = (Random.Range(0, 1) < 0.5) ? 1 : -1;
-         rb.velocity = Vector2.right * walkSpeed * direction;
+      this.choiceTimer -= Time.deltaTime;
+
+      if(Mathf.Abs(this.startPos.x - this.transform.position.x) > this.maxWanderDist){
+         this.direction *= -1;
       }
+      else if (choiceTimer <= 0)
+      {
+         this.choiceTimer = this.maxChoiceTime;
+         float choice = Random.Range(0f, 1.0f);
+
+         if (choice < 0.5)
+         {
+            this.direction = 0;
+            Debug.Log(direction);
+         } 
+         else if (choice < 0.7)
+         {
+            if(this.direction == 0) {
+               this.direction = 1;
+            }
+            this.direction *= -1;
+            Debug.Log(direction);
+         }
+      }
+
+      this.rb.velocity = Vector2.right * this.walkSpeed * direction;
    }
 }

@@ -2,15 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Attack", menuName = "Attack")]
-public class AttackController : ScriptableObject
+public class AttackController : MonoBehaviour
 {
-   // What angle enemies will fly back at
-   public Vector2 knockbackAngle;
+    public Attack attack;
 
-   // How far the enemy will be launched
-   public float knockback;
+    //Angle at which enemy is hit back at
+    private float endLag;
+    private float hitboxDuration;
+    private float startupTime;
 
-   // How much Damage the enemy takes
-   public float damage;
+    // Start is called before the first frame update
+    void Start()
+    {
+        transform.localScale = attack.scale;
+        transform.localPosition = attack.offeset;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        startupTime -= Time.deltaTime;
+        if(startupTime <= 0)
+        {
+            GetComponent<Collider2D>().enabled = true;
+
+            hitboxDuration -= Time.deltaTime;
+            if(hitboxDuration <= 0)
+            {
+                GetComponent<Collider2D>().enabled = false;
+                endLag -= Time.deltaTime;
+            }
+            
+            if (endLag <= 0)
+            {
+                Die();
+            }
+        }
+    }
+    //Assigns all values in controller through attack scriptable
+    public void SetAttack(Attack inAttack)
+    {
+        attack = inAttack;
+        endLag = attack.endLag;
+        hitboxDuration = attack.hitboxDuration;
+        startupTime = attack.startupTime;
+    }
+
+    //Will destroy this attack object. Includes any effects
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -43,7 +43,9 @@ public class PlayerController : MonoBehaviour
     private float rollTimer;
 
     //Attack Variables
+    public GameObject attack;
     private bool attacking;
+    public Attack[] attacks;
     
     public enum State
     {
@@ -85,9 +87,17 @@ public class PlayerController : MonoBehaviour
     {
         if (state == State.alive)
         {
+            attacking = CheckAttacking();
             if (!rolling)
             {
-                CheckPlayerMovement();
+                if (!(attacking && grounded))
+                {
+                    CheckPlayerMovement();
+                }
+                if (!attacking)
+                {
+                    CheckAttack();
+                }
             }
             if (jumpTimer >= 0)
             {
@@ -187,18 +197,34 @@ public class PlayerController : MonoBehaviour
     }
     public void CheckAttack()
     {
-        if (!attacking)
-        {
-            //Horiz. vert. input 
-            float horizontalInput = cntrlSchm.HorizontalInput();
-            float verticalInput = cntrlSchm.VerticalInput();
+        
+        //Horiz. vert. input 
+        float horizontalInput = cntrlSchm.HorizontalInput();
+        float verticalInput = cntrlSchm.VerticalInput();
 
-            //Upward attack
-            if (Input.GetAxis(cntrlSchm.AttackAxis) > 0 && verticalInput > 0)
-            {
-                attacking = true;
-            }
+        Attack attackInputted = null;
+        if (Input.GetAxis(cntrlSchm.AttackAxis) > 0)
+        {
+            print("Attacked");
+            attackInputted = FindAttack("Jab");
         }
+        //Upward attack
+        else if (Input.GetAxis(cntrlSchm.AttackAxis) > 0 && verticalInput > 0)
+        {
+            attackInputted = FindAttack("Upward Attack");
+            attacking = true;
+        }
+
+        else if(Input.GetAxis(cntrlSchm.AttackAxis) > 0 && verticalInput < 0)
+        {
+
+        }
+        if(attackInputted != null)
+        {
+            var spawnedAttack = Instantiate(attack, transform);
+            spawnedAttack.GetComponent<AttackController>().SetAttack(attackInputted);
+        }
+        
     }
     //Will include death animation, effects, probably slow down and sound effect
     public void Die()
@@ -207,7 +233,30 @@ public class PlayerController : MonoBehaviour
     }
     public void FlipCharacter()
     {
-        sprtRend.flipX = !sprtRend.flipX;
+        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+    }
+    private Attack FindAttack(string name)
+    {
+        foreach(Attack e in attacks)
+        {
+            if (e.name.Equals(name))
+            {
+                return e;
+            }
+        }
+        return null;
+    }
+    //Is the player attacking?
+    private bool CheckAttacking()
+    {
+        foreach(Transform e in transform)
+        {
+            if(e.tag == "Attack")
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

@@ -419,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853406198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.184, y: -1.458, z: 0}
+  m_LocalPosition: {x: -0.06, y: -2.145, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 313274831}
@@ -452,6 +452,18 @@ MonoBehaviour:
   rollSpeed: 11
   rollCooldown: 1
   rollDuration: 0.2
+  attack: {fileID: 5513489440620722005, guid: 7d59ef55ab588524ba5be3a4506bb31d, type: 3}
+  attacks:
+  - {fileID: 11400000, guid: b4887c74d04d9c24e99a1876aade849a, type: 2}
+  - {fileID: 11400000, guid: 5f50c6005a2bb8a4ca7c090ba68d42e3, type: 2}
+  - {fileID: 11400000, guid: 2f573054a8c29234aa600bfc47b0f176, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!50 &1853406202
 Rigidbody2D:
   serializedVersion: 4
@@ -521,7 +533,7 @@ Animator:
   m_GameObject: {fileID: 1853406198}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d279c9b491f554e47b881c70b7ffa268, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

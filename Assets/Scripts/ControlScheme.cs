@@ -30,7 +30,7 @@ public class ControlScheme : MonoBehaviour
 
         HorizontalAxis = inputAxisName + "Horizontal";
         VerticalAxis = inputAxisName + "Vertical";
-        JumpAxis = inputAxisName + "Vertical";
+        JumpAxis = inputAxisName + "Jump";
         RollAxis = inputAxisName + "Roll";
         AttackAxis = inputAxisName + "Attack";
         SubmitAxis = inputAxisName + "Submit";

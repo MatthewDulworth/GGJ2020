@@ -16,5 +16,5 @@ MonoBehaviour:
   endLag: 0.3
   invincible: 0
   hitboxes:
-  - {fileID: 11400000, guid: 839c3b3e83bcf91469e9b10adc570f18, type: 2}
-  - {fileID: 11400000, guid: 839c3b3e83bcf91469e9b10adc570f18, type: 2}
+  - {fileID: 11400000, guid: 7a9f163477fa5cb42bdcc051d16063e6, type: 2}
+  - {fileID: 11400000, guid: d8ba246930434884fb7dd7932f8617de, type: 2}

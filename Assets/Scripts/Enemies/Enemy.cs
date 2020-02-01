@@ -53,7 +53,6 @@ public abstract class Enemy : MonoBehaviour
    public virtual void Update()
    {
       grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
-      Debug.Log(grounded);
       handleHitStun();
    }
 
@@ -108,7 +107,6 @@ public abstract class Enemy : MonoBehaviour
          }
          if (hitstun <= 0 && grounded)
          {
-            Debug.Log("grounded");
             state = State.active;
          }
       }

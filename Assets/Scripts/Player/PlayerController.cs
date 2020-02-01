@@ -246,6 +246,7 @@ public class PlayerController : MonoBehaviour
          attacking = true;
          var spawnedAttack = Instantiate(attack, transform);
          spawnedAttack.GetComponent<AttackController>().SetAttack(attackMachine.CurrentAttack);
+         Debug.Log(spawnedAttack.GetComponent<AttackController>().attack.name);
       }
    }
 

@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+   // -------------------------------------------------
+   // Variables 
+   // -------------------------------------------------
    private PlayerState state = PlayerState.alive;
    private ControlScheme cntrlSchm;
 
@@ -55,7 +58,11 @@ public class PlayerController : MonoBehaviour
    {
       left, right
    }
-   // Start is called before the first frame update
+
+
+   // -------------------------------------------------
+   // Start
+   // -------------------------------------------------
    void Start()
    {
       cntrlSchm = GetComponent<ControlScheme>();
@@ -74,6 +81,10 @@ public class PlayerController : MonoBehaviour
       }
       anim = GetComponent<Animator>();
    }
+
+   // -------------------------------------------------
+   // Collision
+   // -------------------------------------------------
    private void OnCollisionEnter2D(Collision2D collision)
    {
 
@@ -83,6 +94,10 @@ public class PlayerController : MonoBehaviour
 
    }
 
+
+   // -------------------------------------------------
+   // Fixed Update
+   // -------------------------------------------------
    private void FixedUpdate()
    {
       if (state == PlayerState.alive)
@@ -110,10 +125,16 @@ public class PlayerController : MonoBehaviour
          }
       }
    }
+
+
+   // -------------------------------------------------
+   // Movement
+   // -------------------------------------------------
    public bool CheckRoll()
    {
       return cntrlSchm.RollPressed();
    }
+
    public void CheckPlayerMovement()
    {
       //Grounded Checks
@@ -181,70 +202,15 @@ public class PlayerController : MonoBehaviour
          Invoke("ResetRoll", rollDuration);
       }
    }
+
    private void ResetRoll()
    {
       rolling = false;
    }
-   public void CheckAttack()
-   {
-      //Horiz. vert. input 
-      float horizontalInput = cntrlSchm.HorizontalInput();
-      float verticalInput = cntrlSchm.VerticalInput();
 
-      Attack attackInputted = null;
-      if (Input.GetAxis(cntrlSchm.AttackAxis) > 0)
-      {
-         attackInputted = FindAttack("Jab");
-      }
-      //Upward attack
-      else if (Input.GetAxis(cntrlSchm.AttackAxis) > 0 && verticalInput > 0)
-      {
-         attackInputted = FindAttack("Upward Attack");
-         attacking = true;
-      }
-
-      else if (Input.GetAxis(cntrlSchm.AttackAxis) > 0 && verticalInput < 0)
-      {
-
-      }
-      if (attackInputted != null)
-      {
-         var spawnedAttack = Instantiate(attack, transform);
-         spawnedAttack.GetComponent<AttackController>().SetAttack(attackInputted);
-      }
-
-   }
-   //Will include death animation, effects, probably slow down and sound effect
-   public void Die()
-   {
-
-   }
    public void FlipCharacter()
    {
       transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
-   }
-   private Attack FindAttack(string name)
-   {
-      foreach (Attack e in attacks)
-      {
-         if (e.name.Equals(name))
-         {
-            return e;
-         }
-      }
-      return null;
-   }
-   //Is the player attacking?
-   private bool CheckAttacking()
-   {
-      foreach (Transform e in transform)
-      {
-         if (e.tag == "Attack")
-         {
-            return true;
-         }
-      }
-      return false;
    }
 
    private void CheckFlip()
@@ -263,6 +229,52 @@ public class PlayerController : MonoBehaviour
          dir = Direction.right;
          Invoke("FlipCharacter", spriteFlipDelay);
       }
+   }
+
+   // -------------------------------------------------
+   // Attacks
+   // -------------------------------------------------
+   public void CheckAttack()
+   {
+      //Horiz. vert. input 
+      float horizontalInput = cntrlSchm.HorizontalInput();
+      float verticalInput = cntrlSchm.VerticalInput();
+
+      
+   }
+
+   private Attack FindAttack(string name)
+   {
+      foreach (Attack attack in attacks)
+      {
+         if (attack.name.Equals(name))
+         {
+            return attack;
+         }
+      }
+      return null;
+   }
+
+   //Is the player attacking?
+   private bool CheckAttacking()
+   {
+      foreach (Transform e in transform)
+      {
+         if (e.tag == "Attack")
+         {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   // -------------------------------------------------
+   // Death
+   // -------------------------------------------------
+   // Will include death animation, effects, probably slow down and sound effect
+   public void Die()
+   {
+
    }
 }
 

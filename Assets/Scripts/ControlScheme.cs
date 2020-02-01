@@ -36,6 +36,7 @@ public class ControlScheme : MonoBehaviour
     }
     public float HorizontalInput()
     {
+        print(Input.GetAxis(HorizontalAxis));
         return Input.GetAxis(HorizontalAxis);
     }
     public float VerticalInput()

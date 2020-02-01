@@ -18,6 +18,7 @@ public class HitboxController : MonoBehaviour
     }
     public void SetHitbox(Hitbox hb)
     {
+        hitbox = hb;
         hitboxDuration = hb.hitboxDuration;
     }
 }

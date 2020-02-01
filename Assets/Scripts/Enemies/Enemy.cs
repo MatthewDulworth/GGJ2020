@@ -5,9 +5,17 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
    // -------------------------------------------------
-   // Properties
+   // Variables
    // -------------------------------------------------
-   public float Health { get; private set; }
+   [SerializeField] protected float health;
+   [SerializeField] protected float walkSpeed;
+   public int healthBar;
+
+   protected States state;
+   protected enum States
+   {
+      hitStun, dead, active, attacking
+   }
 
    // -------------------------------------------------
    // MonoBehaviour
@@ -20,4 +28,16 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public abstract void handleMovement();
    public abstract void handleAttacks();
+
+   public void OnTriggerEnter()
+   {
+
+   }
+
+
+   // -------------------------------------------------
+   // Get / Set 
+   // -------------------------------------------------
+   public float Health { get => health; }
+   public float WalkSpeed { get => walkSpeed; }
 }

@@ -11,6 +11,7 @@ public class HitboxController : MonoBehaviour
     void Start()
     {
         transform.localScale = new Vector3(hitbox.scale.x, hitbox.scale.y, 1);
+        transform.localPosition = hitbox.offset;
     }
     private void FixedUpdate()
     {

@@ -5,13 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    // Stretch: private int score;
-    private int lives;
-    private int comboCounter;
-
-    //Stretch: public int Score { get => score; private set => score = value; }
-    public int Lives { get => lives; private set => lives = value; }
-    public int ComboCounter { get => comboCounter; private set => comboCounter = value; }
+    //Stretch: public int Score { get; private set; }
+    public int Lives { get; private set; }
+    public int ComboCounter { get; private set; }
 
 
     // Start is called before the first frame update

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
    // Variables 
    // -------------------------------------------------
    private PlayerState state = PlayerState.alive;
+   private AttackMachine attackMachine;
    private ControlScheme cntrlSchm;
 
    //Sprite Facing
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
    {
       cntrlSchm = GetComponent<ControlScheme>();
       cntrlSchm.SetControlScheme();
+      attackMachine = new AttackMachine(cntrlSchm, attacks);
       jumpKeyUp = true;
       dir = Direction.left;
       sprtRend = GetComponent<SpriteRenderer>();
@@ -231,28 +233,20 @@ public class PlayerController : MonoBehaviour
       }
    }
 
+
    // -------------------------------------------------
    // Attacks
    // -------------------------------------------------
    public void CheckAttack()
-   {
-      //Horiz. vert. input 
-      float horizontalInput = cntrlSchm.HorizontalInput();
-      float verticalInput = cntrlSchm.VerticalInput();
+   {  
+      // attackMachine.Update(grounded);
 
-      
-   }
-
-   private Attack FindAttack(string name)
-   {
-      foreach (Attack attack in attacks)
-      {
-         if (attack.name.Equals(name))
-         {
-            return attack;
-         }
-      }
-      return null;
+      // if (true)
+      // {
+      //    attacking = true;
+      //    var spawnedAttack = Instantiate(attack, transform);
+      //    spawnedAttack.GetComponent<AttackController>().SetAttack(attackInputted);
+      // }
    }
 
    //Is the player attacking?
@@ -267,6 +261,7 @@ public class PlayerController : MonoBehaviour
       }
       return false;
    }
+
 
    // -------------------------------------------------
    // Death

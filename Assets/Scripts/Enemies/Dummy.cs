@@ -30,7 +30,7 @@ public class Dummy : Enemy
    {
       if (state == States.active)
       {
-         Wander();
+         // Wander();
       }
       else if(state != States.hitStun) {
          rb.velocity = Vector2.zero;

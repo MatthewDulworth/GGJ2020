@@ -29,9 +29,13 @@ public abstract class Enemy : MonoBehaviour
    public abstract void handleMovement();
    public abstract void handleAttacks();
 
-   public void OnTriggerEnter()
+   protected void OnTriggerEnter2D(Collider2D collision)
    {
-
+      if (collision.gameObject.tag == "Attack")
+      {
+         AttackController attack = collision.gameObject.GetComponent<AttackController>();
+         Debug.Log("attacked");
+      }
    }
 
 

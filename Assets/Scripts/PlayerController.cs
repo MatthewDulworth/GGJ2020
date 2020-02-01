@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         cntrlSchm = GetComponent<ControlScheme>();
+        cntrlSchm.SetControlScheme();
         jumpKeyUp = true;
         dir = Direction.left;
         sprtRend = GetComponent<SpriteRenderer>();

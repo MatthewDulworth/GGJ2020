@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     {
         
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Attack")
@@ -16,6 +17,7 @@ public class EnemyController : MonoBehaviour
             AttackController attack = collision.gameObject.GetComponent<AttackController>();
         }
     }
+
     // Update is called once per frame
     void Update()
     {

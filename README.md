@@ -1,2 +1,2 @@
 # GGJ2020
-Global Game Jam 2020 Jam
+Global Game Jam 2020

@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942fef30f10bc614bb923ced4b93a524, type: 3}
-  m_Name: Jab
+  m_Script: {fileID: 11500000, guid: f3257065a7b794f41a7ae2b8ace7a55c, type: 3}
+  m_Name: Up Tilt HB 1
   m_EditorClassIdentifier: 
-  startupTime: 0
-  endLag: 0.1
-  invincible: 0
-  hitboxes:
-  - {fileID: 11400000, guid: 839c3b3e83bcf91469e9b10adc570f18, type: 2}
+  delay: 0
+  knockbackAngle: 45
+  knockback: 0.5
+  priority: 0
+  hitstun: 1
+  hitboxDuration: 0.2
+  scale: {x: 0.8, y: 1}
+  offset: {x: 0.62, y: 0.8}

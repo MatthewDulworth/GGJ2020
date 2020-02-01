@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 942fef30f10bc614bb923ced4b93a524, type: 3}
-  m_Name: Jab
+  m_Name: Up Tilt
   m_EditorClassIdentifier: 
-  startupTime: 0
-  endLag: 0.1
+  startupTime: 0.2
+  endLag: 0.3
   invincible: 0
   hitboxes:
+  - {fileID: 11400000, guid: 839c3b3e83bcf91469e9b10adc570f18, type: 2}
   - {fileID: 11400000, guid: 839c3b3e83bcf91469e9b10adc570f18, type: 2}

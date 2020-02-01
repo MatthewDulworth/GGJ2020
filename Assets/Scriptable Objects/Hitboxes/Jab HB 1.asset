@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0
   knockbackAngle: 225
-  priority: 0
   knockback: 0.1
+  priority: 0
   hitstun: 0.1
   hitboxDuration: 0.1
   scale: {x: 0.8, y: 0.8}
-  offeset: {x: 0.62, y: 0.18}
+  offset: {x: 0.62, y: 0.18}

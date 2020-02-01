@@ -34,6 +34,7 @@ public class AttackController : MonoBehaviour
                 endLag -= Time.deltaTime;
                 if (endLag <= 0)
                 {
+                    print("Die");
                     Die();
                 }
             }
@@ -59,7 +60,8 @@ public class AttackController : MonoBehaviour
     IEnumerator SpawnHitbox(Hitbox hb, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Instantiate(hb, transform);
+        var spawnedHB = Instantiate(hitbox, transform);
+        spawnedHB.GetComponent<HitboxController>().SetHitbox(hb);
     }
 
     //Will destroy this attack object. Includes any effects

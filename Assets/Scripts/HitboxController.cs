@@ -10,11 +10,15 @@ public class HitboxController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.localScale = new Vector3(hitbox.scale.x, hitbox.scale.y, 1);
     }
     private void FixedUpdate()
     {
         hitboxDuration -= Time.deltaTime;
+        if(hitboxDuration <= 0)
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
     }
     public void SetHitbox(Hitbox hb)
     {

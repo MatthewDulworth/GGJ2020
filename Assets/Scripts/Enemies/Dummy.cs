@@ -33,7 +33,7 @@ public class Dummy : Enemy
    {
       if (state == States.active)
       {
-        // Wander();
+         Wander();
       }
       else if (state != States.hitStun)
       {
@@ -64,7 +64,6 @@ public class Dummy : Enemy
          if (choice < 0.5)
          {
             this.direction = 0;
-            Debug.Log(direction);
          } 
          else if (choice < 0.7)
          {
@@ -72,7 +71,6 @@ public class Dummy : Enemy
                this.direction = 1;
             }
             this.direction *= -1;
-            Debug.Log(direction);
          }
       }
 

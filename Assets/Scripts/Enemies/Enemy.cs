@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected float health;
    [SerializeField] protected float walkSpeed;
    [SerializeField] int healthBar;
+   [SerializeField] LayerMask ground;
 
 
    // -------------------------------------------------
@@ -19,11 +20,13 @@ public abstract class Enemy : MonoBehaviour
    protected float hitstun = 0;
    protected int direction = 1;
    protected Rigidbody2D rb;
+   protected GameObject groundCheck;
 
 
    // -------------------------------------------------
    // States
    // -------------------------------------------------
+   protected bool grounded;
    protected States state;
    protected enum States
    {
@@ -37,20 +40,21 @@ public abstract class Enemy : MonoBehaviour
    public virtual void Start()
    {
       state = States.active;
+      foreach (Transform child in transform)
+      {
+         if (child.name == "GroundCheck")
+         {
+            groundCheck = child.gameObject;
+         }
+
+      }
       rb = GetComponent<Rigidbody2D>();
    }
    public virtual void Update()
    {
-      if(state == States.hitStun) 
-      {
-         hitstun -= Time.deltaTime;
-         Debug.Log("stunned");
-         if(hitstun <= 0) {
-            state = States.active;
-            Debug.Log("unstunned");
-            hitboxPriority = -1;
-         }
-      }
+      grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
+      Debug.Log(grounded);
+      handleHitStun();
    }
 
 
@@ -60,6 +64,10 @@ public abstract class Enemy : MonoBehaviour
    public abstract void handleMovement();
    public abstract void handleAttacks();
 
+
+   // -------------------------------------------------
+   // Handle Hits
+   // -------------------------------------------------
    protected void OnTriggerEnter2D(Collider2D collision)
    {
       if (collision.gameObject.tag == "Attack")
@@ -72,18 +80,34 @@ public abstract class Enemy : MonoBehaviour
             this.hitstun = hitbox.hitstun;
             this.state = States.hitStun;
 
-            print(hitbox.name + ", " + hitbox.knockback + ", " + hitbox.knockbackAngle + ", " + this.gameObject);
-
-            // float direction = collision.transform.parent.parent.localScale.x;
-            // Vector2 hitVector = getHitVector(hitbox.knockbackAngle, hitbox.knockback) * direction;
-            rb.velocity = Vector2.up * hitbox.knockback * 30;
+            float direction = collision.transform.parent.parent.localScale.x;
+            rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
          }
       }
    }
 
-   private Vector2 getHitVector(float magnitude, float angle){
-      angle = Mathf.Deg2Rad * angle;
-      return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * magnitude;
+   private Vector2 getHitVector(float magnitude, float angle, float direction)
+   {
+      angle *= -Mathf.Deg2Rad;
+      return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude * 30;
+   }
+
+   private void handleHitStun()
+   {
+      if (state == States.hitStun)
+      {
+         hitstun -= Time.deltaTime;
+
+         if (hitstun <= 0)
+         {
+            hitboxPriority = -1;
+         }
+         if (hitstun <= 0 && grounded)
+         {
+            Debug.Log("grounded");
+            state = States.active;
+         }
+      }
    }
 
 

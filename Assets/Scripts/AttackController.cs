@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Attack", menuName = "Attack")]
-public class AttackController : MonoBehaviour
+public class AttackController : ScriptableObject
 {
     //What angle enemies will fly back at
     public Vector2 knockbackAngle;
+
+    //How far the enemy will be launched
+    public float knockback;
 }

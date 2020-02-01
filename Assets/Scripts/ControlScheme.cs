@@ -32,11 +32,11 @@ public class ControlScheme : MonoBehaviour
     {
         string inputAxisName = "";
 
-        HorizontalAxis = inputAxisName + "_axis_0";
-        VerticalAxis = inputAxisName + "_axis_1";
-        JumpAxis = inputAxisName + "_axis_5";
-        SubmitAxis = inputAxisName + "_axis_submit";
-        CancelAxis = inputAxisName + "_axis_cancel";
+        HorizontalAxis = inputAxisName + "Horizontal";
+        VerticalAxis = inputAxisName + "Vertical";
+        JumpAxis = inputAxisName + "Vertical";
+        SubmitAxis = inputAxisName + "Submit";
+        CancelAxis = inputAxisName + "Cancel";
     }
     public float HorizontalInput()
     {

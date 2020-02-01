@@ -26,16 +26,23 @@ public class PlayerController : MonoBehaviour
     //Jump variables
     public float jumpForce;
     public LayerMask ground;
-    private bool grounded;
+    public bool grounded;
     private GameObject groundCheck;
-    private bool jumpKeyUp;
+    public bool jumpKeyUp;
     public float minJumpTime;
     private float jumpTimer;
 
     //Fast Fall variable
     public float fastFallMultiplier;
 
-    //Attack cooldown
+    //Roll Variables
+    public float rollSpeed;
+    public float rollCooldown;
+    public float rollDuration;
+    private bool rolling;    
+    private float rollTimer;
+
+    //Attack Variables
     private bool attacking;
     
     public enum State
@@ -78,10 +85,17 @@ public class PlayerController : MonoBehaviour
     {
         if (state == State.alive)
         {
-            CheckPlayerMovement();
+            if (!rolling)
+            {
+                CheckPlayerMovement();
+            }
             if (jumpTimer >= 0)
             {
                 jumpTimer -= Time.deltaTime;
+            }
+            if(rollTimer >= 0)
+            {
+                rollTimer -= Time.deltaTime;
             }
         }
     }
@@ -123,7 +137,12 @@ public class PlayerController : MonoBehaviour
         }
         if(Mathf.Abs(rb.velocity.x) > maxSpeedX)
         {
-            rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x / 1.2f, rb.velocity.y);
+        }
+        //Check if jmp key down
+        if (grounded)
+        {
+            jumpKeyUp = true;
         }
         //Jump
         if (cntrlSchm.JumpPressed() && grounded && jumpKeyUp)
@@ -144,15 +163,27 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if(!cntrlSchm.JumpPressed())
-        {
-            jumpKeyUp = true;
-        }
+        
         //Fast Fall
         if (verticalInput < 0 && !grounded)
         {
             rb.AddForce(-transform.up * fastFallMultiplier, ForceMode2D.Impulse);
         }
+
+        //Roll
+        if (cntrlSchm.RollPressed() && rollTimer < 0)
+        {
+            int direction = (dir == Direction.left) ? -1 : 1;
+            rb.velocity = new Vector2(rollSpeed * (direction), rb.velocity.y / 1.5f);
+
+            rolling = true;
+            rollTimer = rollCooldown;
+            Invoke("ResetRoll", rollDuration);
+        }
+    }
+    private void ResetRoll()
+    {
+        rolling = false;
     }
     public void CheckAttack()
     {

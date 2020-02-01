@@ -400,7 +400,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b35482fa63db0f84686f26da74719a37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b40785b18c70a9b479d91b7f53dfe824, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -438,15 +438,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6fb5881daa2c4abe0a7087d2c061d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteFlipDelay: 0.2
-  playerSpeed: 55
-  maxSpeedX: 11
-  jumpForce: 13.5
+  spriteFlipDelay: 0.13
+  playerSpeed: 40
+  maxSpeedX: 5
+  jumpForce: 7
   ground:
     serializedVersion: 2
     m_Bits: 512
+  grounded: 0
+  jumpKeyUp: 0
   minJumpTime: 0.1
   fastFallMultiplier: 2
+  rollSpeed: 11
+  rollCooldown: 1
+  rollDuration: 0.2
 --- !u!50 &1853406202
 Rigidbody2D:
   serializedVersion: 4
@@ -459,10 +464,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1.1
+  m_Mass: 1.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: 4b1b928dca3fc8947a4e12276f654ae0, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -485,7 +490,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

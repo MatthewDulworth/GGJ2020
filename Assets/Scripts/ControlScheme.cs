@@ -31,12 +31,12 @@ public class ControlScheme : MonoBehaviour
         HorizontalAxis = inputAxisName + "Horizontal";
         VerticalAxis = inputAxisName + "Vertical";
         JumpAxis = inputAxisName + "Vertical";
+        RollAxis = inputAxisName + "Roll";
         SubmitAxis = inputAxisName + "Submit";
         CancelAxis = inputAxisName + "Cancel";
     }
     public float HorizontalInput()
     {
-        print(Input.GetAxis(HorizontalAxis));
         return Input.GetAxis(HorizontalAxis);
     }
     public float VerticalInput()

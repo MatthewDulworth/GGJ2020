@@ -146,21 +146,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8694753927494509523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b6fb5881daa2c4abe0a7087d2c061d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e12a0489de64be42b855cf850bfa7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteFlipDelay: 0.13
-  playerSpeed: 30
-  maxSpeedX: 3
+  playerSpeed: 40
+  maxSpeedX: 7
   jumpForce: 7
   ground:
     serializedVersion: 2
     m_Bits: 512
   grounded: 0
   jumpKeyUp: 0
-  minJumpTime: 0.6
+  minJumpTime: 0.1
   fastFallMultiplier: 2
-  rollSpeed: 11
+  rollSpeed: 9
   rollCooldown: 1
   rollDuration: 0.2
   attack: {fileID: 3454468169939910635, guid: 95affdf4f8e26fc41ae08603aa4d52bc, type: 3}
@@ -168,10 +168,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4887c74d04d9c24e99a1876aade849a, type: 2}
   - {fileID: 11400000, guid: 081cd6b4b8b268a4d879f92b612c7650, type: 2}
   - {fileID: 11400000, guid: e46883d5113a745e3b48633c31a965c7, type: 2}
-  - {fileID: 11400000, guid: b06bf1cc4c04c4e3aa1d4abd4a384004, type: 2}
+  - {fileID: 11400000, guid: e388a8b8b796f4ec09cc93672acdfe9f, type: 2}
   - {fileID: 11400000, guid: eeddd667310bf4388a1126c6eefb70aa, type: 2}
   - {fileID: 11400000, guid: d9c2e7f833718423db115df06242c112, type: 2}
-  - {fileID: 11400000, guid: e388a8b8b796f4ec09cc93672acdfe9f, type: 2}
 --- !u!114 &8694753927494509529
 MonoBehaviour:
   m_ObjectHideFlags: 0

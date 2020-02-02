@@ -358,6 +358,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73f91df1aa26b4cacab2434265f04c81, type: 2}
   maxCoolDown: 2
   grounded: 0
+  healedParticle: {fileID: 966134231082214983, guid: ae024404720845e4db709b2f552832bf,
+    type: 3}
 --- !u!95 &125535409132825137
 Animator:
   serializedVersion: 3

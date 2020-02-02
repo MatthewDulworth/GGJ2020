@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParticleEffect : MonoBehaviour
 {
     public float decay;
-
+    public float lifetime;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +15,14 @@ public class ParticleEffect : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        lifetime -= Time.deltaTime;
+        if(lifetime <= 0)
+        {
+            Destroy(gameObject);
+        }
         Color newColor = GetComponent<SpriteRenderer>().color;
-        newColor.a -= Time.deltaTime * 2;
+        newColor.a -= Time.deltaTime * decay;
         GetComponent<SpriteRenderer>().color = newColor;
-        transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime * 2, transform.localScale.y - Time.deltaTime * 2, 1);
+        transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * decay, transform.localScale.y + Time.deltaTime * decay, 1);
     }
 }

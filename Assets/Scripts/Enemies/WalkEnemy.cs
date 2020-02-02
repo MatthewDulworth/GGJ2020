@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WalkEnemy : Enemy
 {
-   // -------------------------------------------------
-   // MonoBehaviour
-   // -------------------------------------------------
-   public override void Start()
+
+    // -------------------------------------------------
+    // MonoBehaviour
+    // -------------------------------------------------
+    public override void Start()
    {
       base.Start();
    }

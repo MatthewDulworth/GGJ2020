@@ -33,6 +33,7 @@ public abstract class Enemy : MonoBehaviour
    protected const int right = -1;
 
    protected GameObject healthBar;
+    public GameObject healedParticle;
 
    // -------------------------------------------------
    // States
@@ -281,6 +282,7 @@ public abstract class Enemy : MonoBehaviour
 
    protected virtual void Die()
    {
+        Instantiate(healedParticle, transform.position, transform.rotation);
       Destroy(gameObject);
    }
 

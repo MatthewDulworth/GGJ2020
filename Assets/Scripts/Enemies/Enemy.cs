@@ -8,13 +8,14 @@ public abstract class Enemy : MonoBehaviour
    // Editor Variables
    // -------------------------------------------------
    [SerializeField] protected float health;
-    private float totalHealth;
+   private float totalHealth;
    [SerializeField] protected float walkSpeed;
    [SerializeField] protected float range;
    [SerializeField] protected LayerMask ground;
    [SerializeField] protected GameObject attack;
    [SerializeField] protected Attack[] attacks;
    [SerializeField] protected float maxCoolDown;
+   [SerializeField] private GameObject human;
 
    // -------------------------------------------------
    // Protected Variables
@@ -65,10 +66,10 @@ public abstract class Enemy : MonoBehaviour
          {
             groundCheck = child.gameObject;
          }
-         if(child.name == "Health Bar")
-            {
-                healthBar = child.gameObject;
-            }
+         if (child.name == "Health Bar")
+         {
+            healthBar = child.gameObject;
+         }
       }
       rb = GetComponent<Rigidbody2D>();
       StartCoroutine(Init(0.5f));
@@ -132,7 +133,7 @@ public abstract class Enemy : MonoBehaviour
             Invoke("ResetTimeScale", .3f);
             GetComponent<AudioSource>().Play();
             collision.gameObject.GetComponent<ParticleSystem>().Play();
-                healthBar.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * health / totalHealth);
+            healthBar.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * health / totalHealth);
 
             this.health -= hitbox.damage;
             if (this.health <= 0)
@@ -282,7 +283,9 @@ public abstract class Enemy : MonoBehaviour
 
    protected virtual void Die()
    {
-        Instantiate(healedParticle, transform.position, transform.rotation);
+      var madeHuman = Instantiate(human);
+      madeHuman.transform.position = transform.position;
+      Instantiate(healedParticle, transform.position, transform.rotation);
       Destroy(gameObject);
    }
 

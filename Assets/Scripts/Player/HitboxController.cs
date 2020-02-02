@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class HitboxController : MonoBehaviour
 {
-    public Hitbox hitbox;
+   public Hitbox hitbox;
 
-    private float hitboxDuration;
-    // Start is called before the first frame update
-    void Start()
-    {
-        transform.localScale = new Vector3(hitbox.scale.x, hitbox.scale.y, 1);
-        transform.localPosition = hitbox.offset;
-    }
-    private void FixedUpdate()
-    {
-        hitboxDuration -= Time.deltaTime;
-        if(hitboxDuration <= 0)
-        {
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
-        }
-    }
-    public void SetHitbox(Hitbox hb)
-    {
-        hitbox = hb;
-        hitboxDuration = hb.hitboxDuration;
-    }
+   private float hitboxDuration;
+   // Start is called before the first frame update
+   void Start()
+   {
+      transform.localScale = new Vector3(hitbox.scale.x, hitbox.scale.y, 1);
+      transform.localPosition = hitbox.offset;
+   }
+   private void FixedUpdate()
+   {
+      hitboxDuration -= Time.deltaTime;
+      if (hitboxDuration <= 0)
+      {
+         GetComponent<Collider2D>().enabled = false;
+         GetComponent<SpriteRenderer>().enabled = false;
+      }
+   }
+   public void SetHitbox(Hitbox hb)
+   {
+      hitbox = hb;
+      hitboxDuration = hb.hitboxDuration;
+   }
 }

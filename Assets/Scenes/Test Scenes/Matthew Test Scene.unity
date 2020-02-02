@@ -775,30 +775,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1652355486572033580, guid: 45d53e9f3051042df94e13de2b499eee,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.047909737
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652355486572033580, guid: 45d53e9f3051042df94e13de2b499eee,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.9041805
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652355486572033581, guid: 45d53e9f3051042df94e13de2b499eee,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1652355486572033583, guid: 45d53e9f3051042df94e13de2b499eee,
         type: 3}
       propertyPath: attacks.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1652355486572033583, guid: 45d53e9f3051042df94e13de2b499eee,
         type: 3}
-      propertyPath: maxCoolDown
-      value: 1
+      propertyPath: attacks.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3929a2dabd7744ace95cff84f64a435f,
+        type: 2}
+    - target: {fileID: 1652355486572033583, guid: 45d53e9f3051042df94e13de2b499eee,
+        type: 3}
+      propertyPath: launchAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652355486572033583, guid: 45d53e9f3051042df94e13de2b499eee,
+        type: 3}
+      propertyPath: launchForce
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45d53e9f3051042df94e13de2b499eee, type: 3}

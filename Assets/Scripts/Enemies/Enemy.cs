@@ -10,8 +10,7 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected float health;
    [SerializeField] protected float walkSpeed;
    [SerializeField] protected float range;
-   [SerializeField] int healthBar;
-   [SerializeField] LayerMask ground;
+   [SerializeField] protected LayerMask ground;
    [SerializeField] protected GameObject attack;
    [SerializeField] protected Attack[] attacks;
    [SerializeField] protected float maxCoolDown;
@@ -117,7 +116,7 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
 
             // effects
-            // GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
             Invoke("ResetTimeScale", .3f);
             GetComponent<AudioSource>().Play();
@@ -154,7 +153,7 @@ public abstract class Enemy : MonoBehaviour
       hitboxPriority = -1;
    }
 
-   private Vector2 getHitVector(float magnitude, float angle, float direction)
+   protected Vector2 getHitVector(float magnitude, float angle, float direction)
    {
       angle *= Mathf.Deg2Rad;
       return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude;
@@ -219,12 +218,13 @@ public abstract class Enemy : MonoBehaviour
       return false;
    }
 
-   public void DoAttack(string name)
+   public AttackController DoAttack(string name)
    {
       AttackController spawnedAttack = Instantiate(this.attack, this.transform).GetComponent<AttackController>();
       spawnedAttack.isAerial = false;
       spawnedAttack.SetAttack(FindAttack(name));
       attacking = true;
+      return spawnedAttack;
    }
 
 
@@ -269,7 +269,7 @@ public abstract class Enemy : MonoBehaviour
 
    protected virtual void Die()
    {
-      
+
    }
 
 
@@ -278,5 +278,4 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public float Health { get => health; }
    public float WalkSpeed { get => walkSpeed; }
-   public float HealthBar { get => healthBar; }
 }

@@ -8,7 +8,10 @@ public class FireEnemy : Enemy
    // MonoBehaviour
    // -------------------------------------------------
    [SerializeField] float rangedCoolDownMax;
+   [SerializeField] float launchAngle;
+   [SerializeField] float launchForce;
    private float rangedCoolDown;
+   private List<AttackController> fireballs;
 
 
    // -------------------------------------------------
@@ -18,6 +21,7 @@ public class FireEnemy : Enemy
    {
       base.Start();
       this.state = State.active;
+      fireballs = new List<AttackController>();
    }
 
    public override void Update()
@@ -29,6 +33,22 @@ public class FireEnemy : Enemy
    public override void FixedUpdate()
    {
       base.FixedUpdate();
+
+      for(int i=fireballs.Count - 1; i >= 0; i--) 
+      {
+         if(fireballs[i] == null) 
+         {
+            fireballs.RemoveAt(i);
+         }
+      }
+
+      foreach(AttackController f in fireballs)
+      {
+         if(Physics2D.OverlapCircle(f.transform.position, 0.4f, ground)) 
+         {
+            f.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+         }
+      }
    }
 
 
@@ -43,7 +63,6 @@ public class FireEnemy : Enemy
 
          if (InRange())
          {
-
             if (coolDown <= 0)
             {
                coolDown = maxCoolDown;
@@ -71,6 +90,10 @@ public class FireEnemy : Enemy
    // -------------------------------------------------
    private void FireAttack()
    {
-      Debug.Log("Yeet");
+      AttackController fireball = DoAttack("Fireball");
+      fireball.transform.parent = null;
+      fireball.gameObject.AddComponent<Rigidbody2D>();
+      fireball.GetComponent<Rigidbody2D>().velocity = getHitVector(this.launchForce, this.launchAngle, -TargetDirection());
+      fireballs.Add(fireball);
    }
 }

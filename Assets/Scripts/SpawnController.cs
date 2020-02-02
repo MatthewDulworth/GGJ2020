@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnController : MonoBehaviour
 {
@@ -11,11 +12,12 @@ public class SpawnController : MonoBehaviour
     public float timeBtwnWaves;
     public float timeBetweenSpawns;
     private float timer;
-    private int currentWave;
-    private int maxEnemiesAllowed = 999;
+    private int currentWave = 1;
+    private int maxEnemiesAllowed = 1;
 
     public GameObject[] enemies;
     private List<GameObject> spawnableEnemies = new List<GameObject>();
+    public GameObject waveClearText;
 
     private float elapsedTime;
     // Start is called before the first frame update
@@ -40,25 +42,52 @@ public class SpawnController : MonoBehaviour
         if(elapsedTime / timeBtwnWaves >= 1)
         {
             print("Wave cleared!!!");
+            StartCoroutine(WaveClearText());
             elapsedTime -= timeBtwnWaves;
             UpdateWave();
         }
     }
+    IEnumerator WaveClearText()
+    {
 
+        waveClearText.SetActive(true);
+        waveClearText.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1500, 0);
+        waveClearText.GetComponent<MoveTowards>().dest = GameObject.Find("Wave Clear dest").transform;
+        yield return new WaitForSeconds(.1f);
+        GameObject.FindObjectOfType<EffectsController>().ScreenFlash(Vector2.zero);
+        yield return new WaitForSeconds(.8f);
+        waveClearText.GetComponent<MoveTowards>().dest = GameObject.Find("Wave Clear dest 2").transform;
+
+    }
     //Will increment wave and set all relevent variables to their desired values
     private void UpdateWave()
     {
         currentWave++;
-        var normalIncrementRate = .1f;
+        Text waveText = GameObject.Find("Wave Text").GetComponent<Text>();
+        waveText.text = "Wave " + currentWave;
+        var normalIncrementRate = .05f;
         switch (currentWave)
         {
             case 1:
                 break;
             case 2:
                 startSpawnRate += normalIncrementRate;
+                timeBtwnWaves++;
                 break;
             case 3:
                 startSpawnRate += normalIncrementRate;
+                timeBtwnWaves++;
+                maxEnemiesAllowed++;
+                break;
+            case 5:
+                startSpawnRate += normalIncrementRate;
+                timeBetweenSpawns /= 1.2f;
+                timeBtwnWaves++;
+                break;
+            case 8:
+                startSpawnRate += normalIncrementRate;
+                timeBetweenSpawns /= 1.2f;
+                maxEnemiesAllowed++;
                 break;
             default:
                 break;

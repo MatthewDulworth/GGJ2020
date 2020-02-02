@@ -51,8 +51,11 @@ public abstract class Enemy : MonoBehaviour
    }
    public virtual void Update()
    {
-      grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
-      handleHitStun();
+        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
+        var newColor = GetComponent<SpriteRenderer>().color;
+        newColor = new Color(newColor.r + Time.deltaTime, newColor.g + Time.deltaTime, newColor.b + Time.deltaTime);
+        GetComponent<SpriteRenderer>().color = newColor;
+         handleHitStun();
    }
 
 

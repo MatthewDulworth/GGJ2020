@@ -216,11 +216,11 @@ public class PlayerController : MonoBehaviour
 
       if (rolling)
       {
-         sprtRend.color = new Color(1f,1f,1f, .5f);
+         sprtRend.color = new Color(1f, 0.2f, 1f, 0.9f);
       }
-      else 
+      else
       {
-         sprtRend.color = new Color(1f,1f,1f, 1f);
+         sprtRend.color = new Color(1f, 1f, 1f, 1f);
       }
    }
    // -------------------------------------------------

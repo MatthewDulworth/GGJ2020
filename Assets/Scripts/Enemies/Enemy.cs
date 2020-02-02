@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public virtual void Start()
    {
-        totalHealth = health;
+      totalHealth = health;
       target = FindObjectOfType<PlayerController>().transform;
       state = State.idle;
       foreach (Transform child in transform)

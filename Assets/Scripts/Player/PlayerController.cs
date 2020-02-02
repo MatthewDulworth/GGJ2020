@@ -246,9 +246,10 @@ public class PlayerController : MonoBehaviour
       if(attackMachine.Attacking)
       {
          attacking = true;
-         var spawnedAttack = Instantiate(attack, transform);
-         spawnedAttack.GetComponent<AttackController>().SetAttack(attackMachine.CurrentAttack);
-         Debug.Log(spawnedAttack.GetComponent<AttackController>().attack.name);
+         AttackController spawnedAttack = Instantiate(attack, transform).GetComponent<AttackController>();
+         spawnedAttack.isAerial = attackMachine.IsAerial;
+         spawnedAttack.SetAttack(attackMachine.CurrentAttack);
+         Debug.Log(spawnedAttack.attack.name);
       }
    }
 

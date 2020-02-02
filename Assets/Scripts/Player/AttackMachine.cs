@@ -10,6 +10,7 @@ public class AttackMachine
    public Attack CurrentAttack { get; private set; }
    public Attack LastAttack { get; private set; }
    public bool Attacking { get; private set; }
+   public bool IsAerial { get; private set; }
    private ControlScheme controlScheme;
    private Attack[] attacks;
 
@@ -32,6 +33,7 @@ public class AttackMachine
    public void Update(bool grounded)
    {
       this.Attacking = false;
+      this.IsAerial = false;
       bool attackPressed = Input.GetAxis(controlScheme.AttackAxis) > 0;
       float vertical = Input.GetAxis(controlScheme.VerticalAxis);
 
@@ -71,6 +73,7 @@ public class AttackMachine
    // -------------------------------------------------
    private void HandleAerials(float vertical)
    {
+      this.IsAerial = true;
       if (vertical > 0)
       {
          UpdateAttack("UpAir");
@@ -81,7 +84,7 @@ public class AttackMachine
       }
       else
       {
-         UpdateAttack("Jab");
+         UpdateAttack("Nair");
       }
    }
 

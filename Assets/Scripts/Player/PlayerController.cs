@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
    // Variables 
    // -------------------------------------------------
    [SerializeField] private float health = 100;
+   [SerializeField] private float maxPriorityDelay = 0.5f;
    private State state = State.alive;
    private AttackMachine attackMachine;
    private ControlScheme cntrlSchm;
@@ -109,17 +110,22 @@ public class PlayerController : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D collision)
    {
-      if(collision.gameObject.tag == "EnemyAttack") {
+      if (collision.gameObject.tag == "EnemyAttack")
+      {
          Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
          if (hitbox.priority > this.hitboxPriority)
          {
             this.hitboxPriority = hitbox.priority;
-            // this.hitstun = hitbox.hitstun;
-            // this.state = State.disabled;
-            float direction = collision.transform.parent.parent.localScale.x * -1;
+
+            float direction = 1;
+            if (collision.transform.parent.parent != null)
+            {
+               direction = collision.transform.parent.parent.localScale.x * -1;
+            }
+
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
-            StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+            StartCoroutine(ResetPriority(Mathf.Min(hitbox.hitboxDuration, maxPriorityDelay)));
 
             GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
@@ -211,15 +217,15 @@ public class PlayerController : MonoBehaviour
       rb.AddForce(playerSpeed * horizontalInput * transform.right);
       if (horizontalInput != 0)
       {
-            if (!runSound.isPlaying)
-            {
-                runSound.Play();
-            }
-            anim.SetBool("Running", true);
+         if (!runSound.isPlaying)
+         {
+            runSound.Play();
+         }
+         anim.SetBool("Running", true);
       }
       else
       {
-            runSound.Stop();
+         runSound.Stop();
          anim.SetBool("Running", false);
       }
       if (Mathf.Abs(rb.velocity.x) > maxSpeedX)
@@ -308,7 +314,6 @@ public class PlayerController : MonoBehaviour
          AttackController spawnedAttack = Instantiate(attack, transform).GetComponent<AttackController>();
          spawnedAttack.isAerial = attackMachine.IsAerial;
          spawnedAttack.SetAttack(attackMachine.CurrentAttack);
-         Debug.Log(spawnedAttack.attack.name);
       }
    }
 

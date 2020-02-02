@@ -44,21 +44,4 @@ public class WalkEnemy : Enemy
          }
       }
    }
-
-
-   private void CheckFlips()
-   {
-      if (TargetDirection() == left && !facingLeft)
-      {
-         Flip();
-         facingLeft = true;
-         Debug.Log(facingLeft);
-      }
-      else if (TargetDirection() == right && facingLeft)
-      {
-         Flip();
-         facingLeft = false;
-         Debug.Log(facingLeft);
-      }
-   }
 }

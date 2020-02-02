@@ -282,6 +282,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73f91df1aa26b4cacab2434265f04c81, type: 2}
   - {fileID: 11400000, guid: 3929a2dabd7744ace95cff84f64a435f, type: 2}
   maxCoolDown: 1
+  human: {fileID: 8967922558729786865, guid: 368c06431674d4804ba461eb52e1f124, type: 3}
   grounded: 0
   rangedCoolDownMax: 3
   launchAngle: -45

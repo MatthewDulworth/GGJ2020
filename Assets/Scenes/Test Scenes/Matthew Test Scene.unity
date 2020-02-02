@@ -720,6 +720,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1652355486572033744, guid: 45d53e9f3051042df94e13de2b499eee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1652355486572033578, guid: 45d53e9f3051042df94e13de2b499eee,
         type: 3}
       propertyPath: m_LocalPosition.x

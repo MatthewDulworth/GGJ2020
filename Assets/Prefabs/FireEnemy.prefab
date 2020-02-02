@@ -273,13 +273,15 @@ MonoBehaviour:
   health: 10
   walkSpeed: 2
   range: 3
-  healthBar: 0
   ground:
     serializedVersion: 2
     m_Bits: 512
   attack: {fileID: 2604964227065109363, guid: 06a84eb3641034fae9c67c15699713ab, type: 3}
   attacks:
   - {fileID: 11400000, guid: 73f91df1aa26b4cacab2434265f04c81, type: 2}
+  - {fileID: 11400000, guid: 3929a2dabd7744ace95cff84f64a435f, type: 2}
   maxCoolDown: 1
   grounded: 0
   rangedCoolDownMax: 3
+  launchAngle: 60
+  launchForce: 10

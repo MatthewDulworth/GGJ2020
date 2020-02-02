@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
    public void CheckPlayerMovement()
    {
       //Grounded Checks
-      grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .4f, ground);
+      grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .2f, ground);
       anim.SetBool("Grounded", grounded);
 
       //Horiz. vert. input 

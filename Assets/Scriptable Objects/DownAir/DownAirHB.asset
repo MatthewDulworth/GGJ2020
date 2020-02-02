@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DownAirHB
   m_EditorClassIdentifier: 
   delay: 0
-  knockbackAngle: 75
+  knockbackAngle: 255
   knockback: 10
   priority: 5
   hitstun: 2

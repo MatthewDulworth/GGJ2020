@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Up Tilt HB 1
   m_EditorClassIdentifier: 
   delay: 0
-  knockbackAngle: 315
+  knockbackAngle: 135
   knockback: 4
   priority: 2
   hitstun: 1

@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    // Variables 
    // -------------------------------------------------
-   private PlayerState state = PlayerState.alive;
+   [SerializeField] private float health = 100;
+   private State state = State.alive;
    private AttackMachine attackMachine;
    private ControlScheme cntrlSchm;
 
@@ -19,8 +20,7 @@ public class PlayerController : MonoBehaviour
 
    //Animation
    private Animator anim;
-   [SerializeField]
-   private float spriteFlipDelay;
+   [SerializeField] private float spriteFlipDelay;
 
    //Side Movement
    public float playerSpeed;
@@ -49,7 +49,11 @@ public class PlayerController : MonoBehaviour
    private bool attacking;
    public Attack[] attacks;
 
-   public enum PlayerState
+   // Hit Vars
+   private int hitboxPriority = -1;
+   private float hitstun = 0;
+
+   public enum State
    {
       alive, dead, disabled
    }
@@ -77,7 +81,6 @@ public class PlayerController : MonoBehaviour
          {
             groundCheck = child.gameObject;
          }
-
       }
       anim = GetComponent<Animator>();
    }
@@ -92,9 +95,40 @@ public class PlayerController : MonoBehaviour
          rb.velocity *= 1.5f;
       }
    }
+
    private void OnTriggerEnter2D(Collider2D collision)
    {
+      if(collision.gameObject.tag == "EnemyAttack") {
+         Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
+         if (hitbox.priority > this.hitboxPriority)
+         {
+            this.hitboxPriority = hitbox.priority;
+            // this.hitstun = hitbox.hitstun;
+            // this.state = State.disabled;
+            float direction = collision.transform.parent.parent.localScale.x * -1;
+            rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
+            StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+
+            // damage
+            this.health -= hitbox.damage;
+            if(this.health <= 0) {
+               Die();
+            }
+         }
+      }
+   }
+
+   IEnumerator ResetPriority(float delay)
+   {
+      yield return new WaitForSeconds(delay);
+      hitboxPriority = -1;
+   }
+
+   private Vector2 getHitVector(float magnitude, float angle, float direction)
+   {
+      angle *= Mathf.Deg2Rad;
+      return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude;
    }
 
 
@@ -103,7 +137,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    private void FixedUpdate()
    {
-      if (state == PlayerState.alive)
+      if (state == State.alive)
       {
          attacking = CheckAttacking();
          if (!rolling)
@@ -246,7 +280,7 @@ public class PlayerController : MonoBehaviour
       if (attackMachine.Attacking)
       {
          attacking = true;
-            GetComponent<AudioSource>().Play();
+         GetComponent<AudioSource>().Play();
          AttackController spawnedAttack = Instantiate(attack, transform).GetComponent<AttackController>();
          spawnedAttack.isAerial = attackMachine.IsAerial;
          spawnedAttack.SetAttack(attackMachine.CurrentAttack);
@@ -274,7 +308,7 @@ public class PlayerController : MonoBehaviour
    // Will include death animation, effects, probably slow down and sound effect
    public void Die()
    {
-   
+      Debug.Log("Player Death");
    }
 }
 

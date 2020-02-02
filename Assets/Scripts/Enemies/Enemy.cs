@@ -11,6 +11,8 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected float walkSpeed;
    [SerializeField] int healthBar;
    [SerializeField] LayerMask ground;
+   [SerializeField] protected GameObject attack;
+   [SerializeField] private Attack[] attacks;
 
 
    // -------------------------------------------------
@@ -21,16 +23,22 @@ public abstract class Enemy : MonoBehaviour
    protected int direction = 1;
    protected Rigidbody2D rb;
    protected GameObject groundCheck;
+   protected bool attacking;
+   protected Transform target;
 
 
    // -------------------------------------------------
    // States
    // -------------------------------------------------
-   protected bool grounded;
+   public bool grounded;
    protected State state;
    protected enum State
    {
-      hitStun, dead, active, attacking, inactive
+      hitStun,
+      landStun,
+      dead,
+      active,
+      idle
    }
 
 
@@ -39,6 +47,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public virtual void Start()
    {
+      target = FindObjectOfType<PlayerController>().transform;
       state = State.active;
       foreach (Transform child in transform)
       {
@@ -57,13 +66,10 @@ public abstract class Enemy : MonoBehaviour
         GetComponent<SpriteRenderer>().color = newColor;
          handleHitStun();
    }
-
-
-   // -------------------------------------------------
-   // public methods
-   // -------------------------------------------------
-   public abstract void handleMovement();
-   public abstract void handleAttacks();
+   public virtual void FixedUpdate()
+   {
+      attacking = CheckAttacking();
+   }
 
 
    // -------------------------------------------------
@@ -73,31 +79,39 @@ public abstract class Enemy : MonoBehaviour
    {
       if (collision.gameObject.tag == "Attack")
       {
-             Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
+         Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
-             if (hitbox.priority > this.hitboxPriority)
-             {
-                this.hitboxPriority = hitbox.priority;
+         if (hitbox.priority > this.hitboxPriority)
+         {
+            this.hitboxPriority = hitbox.priority;
 
-                this.hitstun = hitbox.hitstun;
-                this.state = State.hitStun;
+            this.hitstun = hitbox.hitstun;
+            this.state = State.hitStun;
 
-                float direction = collision.transform.parent.parent.localScale.x * -1;
-                rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
-                StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+            // knockback
+            float direction = collision.transform.parent.parent.localScale.x * -1;
+            rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
+            StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+            
+            // effects
+            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+            Time.timeScale = 1 - hitbox.shakeIntensity;
+            Invoke("ResetTimeScale", .3f);
+            GetComponent<AudioSource>().Play();
+            collision.gameObject.GetComponent<ParticleSystem>().Play();
 
-                GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
-                Time.timeScale = 1 - hitbox.shakeIntensity;
-                Invoke("ResetTimeScale", .3f);
-                GetComponent<AudioSource>().Play();
-                collision.gameObject.GetComponent<ParticleSystem>().Play();
+            this.health -= hitbox.damage;
+            if(this.health <= 0) {
+               Die();
+            }
          }
       }
    }
-    private void ResetTimeScale()
-    {
-        Time.timeScale = 1;
-    }
+   
+   private void ResetTimeScale()
+   {
+      Time.timeScale = 1;
+   }
 
    IEnumerator ResetPriority(float delay)
    {
@@ -123,11 +137,83 @@ public abstract class Enemy : MonoBehaviour
 
          if (hitstun <= 0 && grounded)
          {
-            state = State.active;
+            state = State.landStun;
+            Invoke("Ready", .2f);
          }
       }
    }
 
+   private void Ready()
+   {
+      if (state == State.landStun)
+      {
+         state = State.active;
+      }
+   }
+
+   protected void Flip()
+   {
+      transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
+   }
+
+
+   // -------------------------------------------------
+   // Attacks 
+   // -------------------------------------------------
+   protected Attack FindAttack(string name)
+   {
+      foreach (Attack attack in attacks)
+      {
+         if (attack.name.Equals(name))
+         {
+            return attack;
+         }
+      }
+      return null;
+   }
+
+   public bool CheckAttacking()
+   {
+      foreach (Transform e in transform)
+      {
+         if (e.tag == "Attack")
+         {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   public void DoAttack(string name)
+   {
+      AttackController spawnedAttack = Instantiate(this.attack, this.transform).GetComponent<AttackController>();
+      spawnedAttack.isAerial = false;
+      spawnedAttack.SetAttack(FindAttack(name));
+      attacking = true;
+   }
+
+
+   // -------------------------------------------------
+   // Targeting
+   // -------------------------------------------------
+   protected float TargetDirection()
+   {
+      return this.transform.position.x - target.transform.position.x;
+   }
+
+   protected float TargetDist()
+   {
+      return Vector2.Distance(this.transform.position, target.position);
+   }
+
+
+   // -------------------------------------------------
+   // Death
+   // -------------------------------------------------
+   private void Die() 
+   {
+      Debug.Log("Enemy Killed");
+   }
 
    // -------------------------------------------------
    // Get / Set 

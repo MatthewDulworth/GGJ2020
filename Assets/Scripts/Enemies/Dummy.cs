@@ -30,17 +30,4 @@ public class Dummy : Enemy
          Active();
       }
    }
-
-   // -------------------------------------------------
-   // private methods
-   // -------------------------------------------------
-   private void Idle()
-   {
-   
-   }
-
-   private void Active()
-   {
-
-   }
 }

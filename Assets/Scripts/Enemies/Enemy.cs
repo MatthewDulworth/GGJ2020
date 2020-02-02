@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected float walkSpeed;
    [SerializeField] int healthBar;
    [SerializeField] LayerMask ground;
+   [SerializeField] protected GameObject attack; 
 
 
    // -------------------------------------------------
@@ -22,12 +23,13 @@ public abstract class Enemy : MonoBehaviour
    protected Rigidbody2D rb;
    protected GameObject groundCheck;
    protected bool attacking;
+   protected Transform target;
 
 
    // -------------------------------------------------
    // States
    // -------------------------------------------------
-   protected bool grounded;
+   public bool grounded;
    protected State state;
    protected enum State
    {
@@ -44,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public virtual void Start()
    {
+      target = FindObjectOfType<PlayerController>().transform;
       state = State.active;
       foreach (Transform child in transform)
       {
@@ -130,7 +133,10 @@ public abstract class Enemy : MonoBehaviour
       }
    }
 
-
+   public void Flip()
+   {
+      transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
+   }
 
    // -------------------------------------------------
    // Get / Set 

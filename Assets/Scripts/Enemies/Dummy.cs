@@ -9,6 +9,7 @@ public class Dummy : Enemy
    // -------------------------------------------------
    [SerializeField] private float maxWanderDist;
    [SerializeField] private float maxChoiceTime;
+   [SerializeField] private Attack[] attacks;
    private Vector3 startPos;
    private float choiceTimer = 0;
 
@@ -19,6 +20,7 @@ public class Dummy : Enemy
    {
       base.Start();
       startPos = this.transform.position;
+      this.state = State.active;
    }
    public override void Update()
    {
@@ -26,25 +28,56 @@ public class Dummy : Enemy
 
       if (state == State.active)
       {
-         // Wander();
-      }
-      else if (state != State.hitStun)
-      {
-         rb.velocity = Vector2.zero;
+         Active();
       }
    }
 
    // -------------------------------------------------
    // private methods
    // -------------------------------------------------
-   private void Idle() {
-      if(grounded) {
+   private void Idle()
+   {
+      if (grounded)
+      {
 
       }
    }
 
+   private void Active()
+   {
+      choiceTimer -= Time.deltaTime;
 
-   private void Active() {
+      if(choiceTimer <= 0) {
+         choiceTimer = maxChoiceTime;
+         AttackController spawnedAttack = Instantiate(attack, transform).GetComponent<AttackController>();
+         spawnedAttack.gameObject.tag = "EnemyAttack";
+         spawnedAttack.isAerial = false;
+         spawnedAttack.SetAttack(FindAttack("Jab"));
+         Debug.Log(spawnedAttack.tag);
+      }
+   }
 
+   public bool CheckAttacking()
+   {
+      foreach (Transform e in transform)
+      {
+         if (e.tag == "Attack")
+         {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   private Attack FindAttack(string name)
+   {
+      foreach (Attack attack in attacks)
+      {
+         if (attack.name.Equals(name))
+         {
+            return attack;
+         }
+      }
+      return null;
    }
 }

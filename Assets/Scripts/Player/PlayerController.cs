@@ -92,9 +92,12 @@ public class PlayerController : MonoBehaviour
          rb.velocity *= 1.5f;
       }
    }
+
    private void OnTriggerEnter2D(Collider2D collision)
    {
-
+      if(collision.gameObject.tag == "EnemyAttack") {
+         
+      }
    }
 
 
@@ -246,7 +249,7 @@ public class PlayerController : MonoBehaviour
       if (attackMachine.Attacking)
       {
          attacking = true;
-            GetComponent<AudioSource>().Play();
+         GetComponent<AudioSource>().Play();
          AttackController spawnedAttack = Instantiate(attack, transform).GetComponent<AttackController>();
          spawnedAttack.isAerial = attackMachine.IsAerial;
          spawnedAttack.SetAttack(attackMachine.CurrentAttack);

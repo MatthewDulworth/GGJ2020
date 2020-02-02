@@ -17,7 +17,7 @@ MonoBehaviour:
   knockback: 20
   priority: 2
   hitstun: 0.1
-  hitboxDuration: 4
+  hitboxDuration: 2.5
   scale: {x: 1, y: 1}
   offset: {x: 0, y: 0}
   damage: 1

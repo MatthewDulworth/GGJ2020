@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public virtual void Start()
    {
-        totalHealth = health;
+      totalHealth = health;
       target = FindObjectOfType<PlayerController>().transform;
       state = State.idle;
       foreach (Transform child in transform)
@@ -104,7 +104,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    // Handle Hits
    // -------------------------------------------------
-   protected void OnTriggerEnter2D(Collider2D collision)
+   protected virtual void OnTriggerEnter2D(Collider2D collision)
    {
       if (collision.gameObject.tag == "Attack")
       {
@@ -140,7 +140,7 @@ public abstract class Enemy : MonoBehaviour
       }
    }
 
-   private void HaltAttacks()
+   protected void HaltAttacks()
    {
       foreach (Transform t in transform)
       {
@@ -151,12 +151,12 @@ public abstract class Enemy : MonoBehaviour
       }
    }
 
-   private void ResetTimeScale()
+   protected void ResetTimeScale()
    {
       Time.timeScale = 1;
    }
 
-   IEnumerator ResetPriority(float delay)
+   protected IEnumerator ResetPriority(float delay)
    {
       yield return new WaitForSeconds(delay);
       hitboxPriority = -1;
@@ -172,7 +172,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    // Handle Hitstun
    // -------------------------------------------------
-   private void handleHitStun()
+   protected virtual void handleHitStun()
    {
       if (state == State.hitStun)
       {
@@ -186,7 +186,7 @@ public abstract class Enemy : MonoBehaviour
       }
    }
 
-   private void Ready()
+   protected void Ready()
    {
       if (state == State.landStun)
       {

@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 3834338074556755453}
   - component: {fileID: 3834338074556755452}
   - component: {fileID: 3834338074556755455}
+  - component: {fileID: 125535409132825137}
   m_Layer: 11
   m_Name: WalkEnemy
   m_TagString: Enemy
@@ -179,12 +180,13 @@ SpriteRenderer:
   m_SortingLayerID: -1248474167
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: adbbcdc8968c78747afd6b1bea5d3556, type: 3}
+  m_Sprite: {fileID: 1770013450482122997, guid: adbbcdc8968c78747afd6b1bea5d3556,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -325,7 +327,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -356,6 +358,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73f91df1aa26b4cacab2434265f04c81, type: 2}
   maxCoolDown: 2
   grounded: 0
+--- !u!95 &125535409132825137
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3834338074556755329}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8df42effe17c1f449c4a5e420a9fb3a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5761166573182061430
 GameObject:
   m_ObjectHideFlags: 0

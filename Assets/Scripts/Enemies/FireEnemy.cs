@@ -98,7 +98,7 @@ public class FireEnemy : Enemy
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
 
             // effects
-            //GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
             Invoke("ResetTimeScale", .3f);
             GetComponent<AudioSource>().Play();

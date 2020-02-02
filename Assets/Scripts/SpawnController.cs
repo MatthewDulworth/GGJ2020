@@ -65,6 +65,8 @@ public class SpawnController : MonoBehaviour
         currentWave++;
         Text waveText = GameObject.Find("Wave Text").GetComponent<Text>();
         waveText.text = "Wave " + currentWave;
+        waveText.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1000);
+
         var normalIncrementRate = .05f;
         switch (currentWave)
         {

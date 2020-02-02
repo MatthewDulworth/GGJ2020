@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
    private int hitboxPriority = -1;
    private float hitstun = 0;
 
+    // Run sound
+    private AudioSource runSound;
    public enum State
    {
       alive, dead, disabled
@@ -81,6 +83,10 @@ public class PlayerController : MonoBehaviour
          {
             groundCheck = child.gameObject;
          }
+         if(child.name == "Run Sound")
+            {
+                runSound = child.gameObject.GetComponent<AudioSource>();
+            }
       }
       anim = GetComponent<Animator>();
    }
@@ -192,10 +198,15 @@ public class PlayerController : MonoBehaviour
       rb.AddForce(playerSpeed * horizontalInput * transform.right);
       if (horizontalInput != 0)
       {
-         anim.SetBool("Running", true);
+            if (!runSound.isPlaying)
+            {
+                runSound.Play();
+            }
+            anim.SetBool("Running", true);
       }
       else
       {
+            runSound.Stop();
          anim.SetBool("Running", false);
       }
       if (Mathf.Abs(rb.velocity.x) > maxSpeedX)

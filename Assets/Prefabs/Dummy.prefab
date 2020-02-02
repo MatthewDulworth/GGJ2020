@@ -182,11 +182,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attack: {fileID: 2604964227065109363, guid: 06a84eb3641034fae9c67c15699713ab, type: 3}
+  attacks:
+  - {fileID: 11400000, guid: b4887c74d04d9c24e99a1876aade849a, type: 2}
   grounded: 0
   maxWanderDist: 5
   maxChoiceTime: 2
-  attacks:
-  - {fileID: 11400000, guid: b4887c74d04d9c24e99a1876aade849a, type: 2}
 --- !u!82 &1195893604380436300
 AudioSource:
   m_ObjectHideFlags: 0
@@ -199,13 +199,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 191133b386f2c244c98bced8cb352ec9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.56
-  m_Pitch: 1
+  m_Volume: 0.638
+  m_Pitch: 1.35
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 26
+  Priority: 46
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

@@ -76,12 +76,13 @@ public class SpawnController : MonoBehaviour
                 break;
             case 2:
                 startSpawnRate += normalIncrementRate;
-                timeBtwnWaves++;
                 maxEnemiesAllowed++;
+                timeBetweenSpawns /= 1.2f;
                 break;
             case 3:
                 startSpawnRate += normalIncrementRate;
                 timeBtwnWaves++;
+                spawnableEnemies.Add(enemies[1]);
                 break;
             case 4:
                 maxEnemiesAllowed++;

@@ -73,6 +73,10 @@ public abstract class Enemy : MonoBehaviour
       {
          coolDown -= Time.deltaTime;
       }
+
+      var newColor = GetComponent<SpriteRenderer>().color;
+      newColor = new Color(newColor.r + Time.deltaTime, newColor.g + Time.deltaTime, newColor.b + Time.deltaTime);
+      GetComponent<SpriteRenderer>().color = newColor;
    }
 
    public virtual void FixedUpdate()
@@ -130,9 +134,9 @@ public abstract class Enemy : MonoBehaviour
 
    private void HaltAttacks()
    {
-      foreach(Transform t in transform) 
+      foreach (Transform t in transform)
       {
-         if(t.CompareTag("EnemyAttack")) 
+         if (t.CompareTag("EnemyAttack"))
          {
             Destroy(t.gameObject);
          }

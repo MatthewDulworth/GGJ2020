@@ -24,7 +24,7 @@ public class EffectsController : MonoBehaviour
         public static float shakeIntensity;
         public float decay = 1.0f;
 
-        Vector3 originalPos;
+        public Vector3 originalPos;
 
     //Screen Flash
     //Will only do caluclations for screen flash if screenFlashing is true
@@ -101,7 +101,6 @@ public class EffectsController : MonoBehaviour
     {
         shaking = true;
         camTransform = FindObjectOfType<Camera>().transform;
-        originalPos = camTransform.position;
         shakeDuration = inShakeDuration;
         shakeIntensity = inShakeIntensity;
     }

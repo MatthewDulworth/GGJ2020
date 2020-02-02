@@ -412,11 +412,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 0.2
   decay: 1
+  originalPos: {x: 0, y: 0, z: -10}
   screenFlash: {fileID: 6845914234158523645, guid: 41e15fda0b9472745b3a3941e51f9eac,
     type: 3}
   flashSpeed: 2
-  flashDuration: 0.3
-  fadeSpeed: 10
+  flashDuration: 0.2
+  fadeSpeed: 20
   maxFlashSize: 1000
 --- !u!1 &1470418868
 GameObject:

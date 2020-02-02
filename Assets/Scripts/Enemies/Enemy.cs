@@ -246,6 +246,19 @@ public abstract class Enemy : MonoBehaviour
       return TargetDist() <= this.range;
    }
 
+   protected void CheckFlips()
+   {
+      if (TargetDirection() == left && !facingLeft)
+      {
+         Flip();
+         facingLeft = true;
+      }
+      else if (TargetDirection() == right && facingLeft)
+      {
+         Flip();
+         facingLeft = false;
+      }
+   }
 
    // -------------------------------------------------
    // States
@@ -256,8 +269,9 @@ public abstract class Enemy : MonoBehaviour
 
    protected virtual void Die()
    {
-      Debug.Log("Enemy Killed");
+      
    }
+
 
    // -------------------------------------------------
    // Get / Set 

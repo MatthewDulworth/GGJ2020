@@ -295,7 +295,6 @@ public class PlayerController : MonoBehaviour
          AttackController spawnedAttack = Instantiate(attack, transform).GetComponent<AttackController>();
          spawnedAttack.isAerial = attackMachine.IsAerial;
          spawnedAttack.SetAttack(attackMachine.CurrentAttack);
-         Debug.Log(spawnedAttack.attack.name);
       }
    }
 
@@ -319,7 +318,7 @@ public class PlayerController : MonoBehaviour
    // Will include death animation, effects, probably slow down and sound effect
    public void Die()
    {
-      Debug.Log("Player Death");
+      
    }
 }
 

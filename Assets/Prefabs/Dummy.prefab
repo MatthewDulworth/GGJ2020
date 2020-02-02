@@ -175,8 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9a3be9d43f542debb229a44bd245fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 5
   walkSpeed: 1
+  range: 0
   healthBar: 1
   ground:
     serializedVersion: 2
@@ -184,6 +185,7 @@ MonoBehaviour:
   attack: {fileID: 2604964227065109363, guid: 06a84eb3641034fae9c67c15699713ab, type: 3}
   attacks:
   - {fileID: 11400000, guid: b4887c74d04d9c24e99a1876aade849a, type: 2}
+  maxCoolDown: 0
   grounded: 0
   maxWanderDist: 5
   maxChoiceTime: 2
@@ -199,8 +201,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 191133b386f2c244c98bced8cb352ec9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.638
-  m_Pitch: 1.35
+  m_Volume: 0.756
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0

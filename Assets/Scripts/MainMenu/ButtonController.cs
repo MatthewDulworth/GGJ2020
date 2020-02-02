@@ -47,4 +47,8 @@ public class ButtonController : MonoBehaviour
             Time.timeScale = 1;
         }
     }
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

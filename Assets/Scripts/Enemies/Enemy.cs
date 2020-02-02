@@ -256,7 +256,7 @@ public abstract class Enemy : MonoBehaviour
 
    protected virtual void Die()
    {
-      Debug.Log("Enemy Killed");
+        Destroy(gameObject);
    }
 
    // -------------------------------------------------

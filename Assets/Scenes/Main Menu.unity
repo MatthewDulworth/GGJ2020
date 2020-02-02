@@ -1658,7 +1658,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 164
+    m_MaxSize: 212
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1

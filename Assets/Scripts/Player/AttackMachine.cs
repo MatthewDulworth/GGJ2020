@@ -34,7 +34,8 @@ public class AttackMachine
    {
       this.Attacking = false;
       this.IsAerial = false;
-      bool attackPressed = Input.GetAxis(controlScheme.AttackAxis) > 0;
+      // bool attackPressed = Input.GetAxis(controlScheme.AttackAxis) > 0;
+      bool attackPressed = Input.GetKeyDown(KeyCode.J);
       float vertical = Input.GetAxis(controlScheme.VerticalAxis);
 
       if (grounded && attackPressed)

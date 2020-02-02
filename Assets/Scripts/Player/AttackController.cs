@@ -55,6 +55,7 @@ public class AttackController : MonoBehaviour
          StartCoroutine(SpawnHitbox(e, startupTime + e.delay));
       }
    }
+
    IEnumerator SpawnHitbox(Hitbox hb, float delay)
    {
       yield return new WaitForSeconds(delay);

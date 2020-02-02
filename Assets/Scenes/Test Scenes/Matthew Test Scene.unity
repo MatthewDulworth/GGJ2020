@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443025215}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.87, y: -2.24, z: 0}
+  m_LocalPosition: {x: -5.25, y: -2.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 753803378}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   walkSpeed: 1
-  range: 0
+  range: 2
   healthBar: 0
   ground:
     serializedVersion: 2
@@ -178,6 +178,7 @@ MonoBehaviour:
   attack: {fileID: 2604964227065109363, guid: 06a84eb3641034fae9c67c15699713ab, type: 3}
   attacks:
   - {fileID: 11400000, guid: 73f91df1aa26b4cacab2434265f04c81, type: 2}
+  maxCoolDown: 1
   grounded: 0
 --- !u!61 &443025218
 BoxCollider2D:
@@ -192,7 +193,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.047909737}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -203,7 +204,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.9041805}
   m_EdgeRadius: 0
 --- !u!82 &443025219
 AudioSource:
@@ -502,7 +503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753803377}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.78, z: 1.3911786}
+  m_LocalPosition: {x: -0.02, y: -0.38, z: 1.3911786}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 443025216}

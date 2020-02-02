@@ -14,7 +14,7 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] LayerMask ground;
    [SerializeField] protected GameObject attack;
    [SerializeField] protected Attack[] attacks;
-   [SerializeField] protected float maxCoolDown = 1f;
+   [SerializeField] protected float maxCoolDown;
 
    // -------------------------------------------------
    // Protected Variables
@@ -63,24 +63,27 @@ public abstract class Enemy : MonoBehaviour
       }
       rb = GetComponent<Rigidbody2D>();
    }
+
    public virtual void Update()
    {
       grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
       handleHitStun();
 
-      if(coolDown > 0) {
+      if (coolDown > 0)
+      {
          coolDown -= Time.deltaTime;
       }
    }
+
    public virtual void FixedUpdate()
    {
       attacking = CheckAttacking();
 
-      if(state == State.active) 
+      if (state == State.active)
       {
          Active();
       }
-      else if(state == State.idle) 
+      else if (state == State.idle)
       {
          Idle();
       }
@@ -99,6 +102,7 @@ public abstract class Enemy : MonoBehaviour
          if (hitbox.priority > this.hitboxPriority)
          {
             this.hitboxPriority = hitbox.priority;
+            HaltAttacks();
 
             this.hitstun = hitbox.hitstun;
             this.state = State.hitStun;
@@ -120,6 +124,17 @@ public abstract class Enemy : MonoBehaviour
             {
                Die();
             }
+         }
+      }
+   }
+
+   private void HaltAttacks()
+   {
+      foreach(Transform t in transform) 
+      {
+         if(t.CompareTag("EnemyAttack")) 
+         {
+            Destroy(t.gameObject);
          }
       }
    }
@@ -172,6 +187,7 @@ public abstract class Enemy : MonoBehaviour
       transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
    }
 
+
    // -------------------------------------------------
    // Attacks 
    // -------------------------------------------------
@@ -221,7 +237,7 @@ public abstract class Enemy : MonoBehaviour
       return Vector2.Distance(this.transform.position, target.position);
    }
 
-   protected bool InRange() 
+   protected bool InRange()
    {
       return TargetDist() <= this.range;
    }

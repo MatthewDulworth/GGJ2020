@@ -11,7 +11,6 @@ public class ControlScheme : MonoBehaviour
     private string attackAxis;
     private string submitAxis;
     private string cancelAxis;
-    private bool attackBtnDown;
 
     public string HorizontalAxis { get => horizontalAxis; set => horizontalAxis = value; }
     public string VerticalAxis { get => verticalAxis; set => verticalAxis = value; }
@@ -60,8 +59,5 @@ public class ControlScheme : MonoBehaviour
     public bool CancelPressed()
     {
         return Input.GetAxis(CancelAxis) > 0;
-    }
-    private void Update(){
-       
     }
 }

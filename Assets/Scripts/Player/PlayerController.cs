@@ -36,9 +36,6 @@ public class PlayerController : MonoBehaviour
    public float minJumpTime;
    private float jumpTimer;
 
-   //Fast Fall variable
-   public float fastFallMultiplier;
-
    //Roll Variables
    public float rollSpeed;
    public float rollCooldown;
@@ -195,12 +192,6 @@ public class PlayerController : MonoBehaviour
                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 4);
             }
          }
-      }
-
-      //Fast Fall
-      if (verticalInput < 0 && !grounded)
-      {
-         rb.AddForce(-transform.up * fastFallMultiplier, ForceMode2D.Impulse);
       }
 
       //Roll

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942fef30f10bc614bb923ced4b93a524, type: 3}
   m_Name: DownAir
   m_EditorClassIdentifier: 
-  startupTime: 0
-  endLag: 0
+  startupTime: 0.2
+  endLag: 0.4
   invincible: 0
-  hitboxes: []
+  hitboxes:
+  - {fileID: 11400000, guid: b6328e7459f2dde4ebfd901a8c0a216d, type: 2}

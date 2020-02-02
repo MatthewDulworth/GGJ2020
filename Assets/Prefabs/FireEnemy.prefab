@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1652355486572033581}
   - component: {fileID: 1652355486572033582}
   - component: {fileID: 1652355486572033583}
+  - component: {fileID: 7824404187413592787}
   m_Layer: 11
   m_Name: FireEnemy
   m_TagString: Enemy
@@ -63,7 +64,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1652355486076534336}
-  - {fileID: 5904276232067092068}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,7 +113,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &1652355486572033580
@@ -289,3 +289,22 @@ MonoBehaviour:
   ascendVelocity: 3
   floatHeight: 3
   landStun: 0.5
+--- !u!95 &7824404187413592787
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652355486572033744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 1555e06e6044a0046b4015546769c836, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

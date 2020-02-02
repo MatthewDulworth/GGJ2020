@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    // Variables 
    // -------------------------------------------------
-   [SerializeField] private float health = 100;
+   [SerializeField] private float health;
    [SerializeField] private float maxPriorityDelay = 0.5f;
    private State state = State.alive;
    private AttackMachine attackMachine;
@@ -57,6 +57,11 @@ public class PlayerController : MonoBehaviour
     // Run sound
     private AudioSource runSound;
     private AudioSource hitSound;
+
+    //Health Bar
+    public GameObject healthBar;
+    public float healthRegenTime;
+    private float healthTimer;
    public enum State
    {
       alive, dead, disabled
@@ -72,6 +77,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    void Start()
    {
+        healthTimer = healthRegenTime;
       cntrlSchm = GetComponent<ControlScheme>();
       cntrlSchm.SetControlScheme();
       attackMachine = new AttackMachine(cntrlSchm, attacks);
@@ -134,7 +140,9 @@ public class PlayerController : MonoBehaviour
                 collision.gameObject.GetComponent<ParticleSystem>().Play();
                 // damage
                 this.health -= hitbox.damage;
-            if(this.health <= 0) {
+                healthBar.transform.GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
+                
+            if (this.health <= 0) {
                Die();
             }
          }
@@ -186,6 +194,16 @@ public class PlayerController : MonoBehaviour
             rollTimer -= Time.deltaTime;
          }
       }
+      if(health == 1)
+        {
+            healthTimer -= Time.deltaTime;
+            healthBar.transform.GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * (1 - healthTimer / healthRegenTime));
+        }
+      if(healthTimer <= 0)
+        {
+            healthTimer = healthRegenTime;
+            health = 2;
+        }
    }
 
    private void Update()
@@ -279,7 +297,8 @@ public class PlayerController : MonoBehaviour
    public void FlipCharacter()
    {
       transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
-   }
+        healthBar.transform.localScale = new Vector3(-healthBar.transform.localScale.x, healthBar.transform.localScale.y, 1);
+    }
 
    private void CheckFlip()
    {

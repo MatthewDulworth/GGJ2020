@@ -54,14 +54,14 @@ public class PlayerController : MonoBehaviour
    private int hitboxPriority = -1;
    private float hitstun = 0;
 
-    // Run sound
-    private AudioSource runSound;
-    private AudioSource hitSound;
+   // Run sound
+   private AudioSource runSound;
+   private AudioSource hitSound;
 
-    //Health Bar
-    public GameObject healthBar;
-    public float healthRegenTime;
-    private float healthTimer;
+   //Health Bar
+   public GameObject healthBar;
+   public float healthRegenTime;
+   private float healthTimer;
    public enum State
    {
       alive, dead, disabled
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    void Start()
    {
-        healthTimer = healthRegenTime;
+      healthTimer = healthRegenTime;
       cntrlSchm = GetComponent<ControlScheme>();
       cntrlSchm.SetControlScheme();
       attackMachine = new AttackMachine(cntrlSchm, attacks);
@@ -91,15 +91,15 @@ public class PlayerController : MonoBehaviour
          {
             groundCheck = child.gameObject;
          }
-         if(child.name == "Run Sound")
-            {
-                runSound = child.gameObject.GetComponent<AudioSource>();
-            }
-            if (child.name == "Hit Sound")
-            {
-                hitSound = child.gameObject.GetComponent<AudioSource>();
-            }
-        }
+         if (child.name == "Run Sound")
+         {
+            runSound = child.gameObject.GetComponent<AudioSource>();
+         }
+         if (child.name == "Hit Sound")
+         {
+            hitSound = child.gameObject.GetComponent<AudioSource>();
+         }
+      }
       anim = GetComponent<Animator>();
    }
 
@@ -133,26 +133,27 @@ public class PlayerController : MonoBehaviour
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
             StartCoroutine(ResetPriority(Mathf.Min(hitbox.hitboxDuration, maxPriorityDelay)));
 
-           GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
             Invoke("ResetTimeScale", .2f);
-                hitSound.Play();
-                collision.gameObject.GetComponent<ParticleSystem>().Play();
-                // damage
-                this.health -= hitbox.damage;
-                healthBar.transform.GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
-                
-            if (this.health <= 0) {
+            hitSound.Play();
+            collision.gameObject.GetComponent<ParticleSystem>().Play();
+            // damage
+            this.health -= hitbox.damage;
+            healthBar.transform.GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
+
+            if (this.health <= 0)
+            {
                Die();
             }
          }
       }
    }
-    private void ResetTimeScale()
-    {
-        Time.timeScale = 1;
-    }
-    IEnumerator ResetPriority(float delay)
+   private void ResetTimeScale()
+   {
+      Time.timeScale = 1;
+   }
+   IEnumerator ResetPriority(float delay)
    {
       yield return new WaitForSeconds(delay);
       hitboxPriority = -1;
@@ -194,16 +195,16 @@ public class PlayerController : MonoBehaviour
             rollTimer -= Time.deltaTime;
          }
       }
-      if(health == 1)
-        {
-            healthTimer -= Time.deltaTime;
-            healthBar.transform.GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * (1 - healthTimer / healthRegenTime));
-        }
-      if(healthTimer <= 0)
-        {
-            healthTimer = healthRegenTime;
-            health = 2;
-        }
+      if (health == 1)
+      {
+         healthTimer -= Time.deltaTime;
+         healthBar.transform.GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * (1 - healthTimer / healthRegenTime));
+      }
+      if (healthTimer <= 0)
+      {
+         healthTimer = healthRegenTime;
+         health = 2;
+      }
    }
 
    private void Update()
@@ -211,6 +212,15 @@ public class PlayerController : MonoBehaviour
       if (!cntrlSchm.RollPressed())
       {
          rollKeyDown = false;
+      }
+
+      if (rolling)
+      {
+         sprtRend.color = new Color(1f,1f,1f, .5f);
+      }
+      else 
+      {
+         sprtRend.color = new Color(1f,1f,1f, 1f);
       }
    }
    // -------------------------------------------------
@@ -297,8 +307,8 @@ public class PlayerController : MonoBehaviour
    public void FlipCharacter()
    {
       transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
-        healthBar.transform.localScale = new Vector3(-healthBar.transform.localScale.x, healthBar.transform.localScale.y, 1);
-    }
+      healthBar.transform.localScale = new Vector3(-healthBar.transform.localScale.x, healthBar.transform.localScale.y, 1);
+   }
 
    private void CheckFlip()
    {

@@ -52,7 +52,7 @@ public abstract class Enemy : MonoBehaviour
    public virtual void Start()
    {
       target = FindObjectOfType<PlayerController>().transform;
-      state = State.active;
+      state = State.idle;
       foreach (Transform child in transform)
       {
          if (child.name == "GroundCheck")
@@ -61,6 +61,7 @@ public abstract class Enemy : MonoBehaviour
          }
       }
       rb = GetComponent<Rigidbody2D>();
+      StartCoroutine(Init(0.5f));
    }
 
    public virtual void Update()
@@ -116,7 +117,7 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
 
             // effects
-             GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
             Invoke("ResetTimeScale", .3f);
             GetComponent<AudioSource>().Play();
@@ -260,6 +261,7 @@ public abstract class Enemy : MonoBehaviour
       }
    }
 
+
    // -------------------------------------------------
    // States
    // -------------------------------------------------
@@ -272,6 +274,11 @@ public abstract class Enemy : MonoBehaviour
       Destroy(gameObject);
    }
 
+   private IEnumerator Init(float delay)
+   {
+      yield return new WaitForSeconds(delay);
+      state = State.active;
+   }
 
    // -------------------------------------------------
    // Get / Set 

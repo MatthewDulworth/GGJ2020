@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour
    protected State state;
    protected enum State
    {
-      hitStun, dead, active, attacking
+      hitStun, dead, active, attacking, inactive
    }
 
 
@@ -46,7 +46,6 @@ public abstract class Enemy : MonoBehaviour
          {
             groundCheck = child.gameObject;
          }
-
       }
       rb = GetComponent<Rigidbody2D>();
    }
@@ -76,13 +75,21 @@ public abstract class Enemy : MonoBehaviour
          if (hitbox.priority > this.hitboxPriority)
          {
             this.hitboxPriority = hitbox.priority;
+
             this.hitstun = hitbox.hitstun;
             this.state = State.hitStun;
 
             float direction = collision.transform.parent.parent.localScale.x * -1;
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
+            StartCoroutine(ResetPriority(hitbox.hitboxDuration));
          }
       }
+   }
+
+   IEnumerator ResetPriority(float delay)
+   {
+      yield return new WaitForSeconds(delay);
+      this.hitboxPriority = -1;
    }
 
    private Vector2 getHitVector(float magnitude, float angle, float direction)
@@ -101,10 +108,6 @@ public abstract class Enemy : MonoBehaviour
       {
          hitstun -= Time.deltaTime;
 
-         if (hitstun <= 0)
-         {
-            hitboxPriority = -1;
-         }
          if (hitstun <= 0 && grounded)
          {
             state = State.active;

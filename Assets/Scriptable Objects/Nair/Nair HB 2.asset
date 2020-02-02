@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Nair HB 2
   m_EditorClassIdentifier: 
   delay: 0
-  knockbackAngle: 0
+  knockbackAngle: 180
   knockback: 3
   priority: 1
   hitstun: 0.2
-  hitboxDuration: 0.2
+  hitboxDuration: 0.3
   scale: {x: 1, y: 2}
   offset: {x: 0.2, y: -0.135}

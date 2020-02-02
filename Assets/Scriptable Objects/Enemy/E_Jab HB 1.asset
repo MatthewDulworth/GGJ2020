@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: E_Jab HB 1
   m_EditorClassIdentifier: 
   delay: 0
-  knockbackAngle: 0
-  knockback: 0
+  knockbackAngle: 45
+  knockback: 5
   priority: 0
-  hitstun: 0
-  hitboxDuration: 0
-  scale: {x: 0, y: 0}
-  offset: {x: 0, y: 0}
-  shakeDuration: 0
-  shakeIntensity: 0
+  hitstun: 0.1
+  hitboxDuration: 1
+  scale: {x: 0.8, y: 0.8}
+  offset: {x: -0.62, y: 0.18}
+  damage: 1
+  shakeDuration: 0.1
+  shakeIntensity: 0.02

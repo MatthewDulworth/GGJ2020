@@ -21,7 +21,6 @@ public class AttackController : MonoBehaviour
       {
          maxHitboxDuration -= Time.deltaTime;
 
-
          // kill aerials on landing
          if (isAerial && transform.parent.gameObject.GetComponent<PlayerController>().grounded)
          {
@@ -64,7 +63,7 @@ public class AttackController : MonoBehaviour
    }
 
    //Will destroy this attack object. Includes any effects
-   private void Die()
+   public void Die()
    {
       Destroy(gameObject);
    }

@@ -9,22 +9,27 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    [SerializeField] protected float health;
    [SerializeField] protected float walkSpeed;
+   [SerializeField] protected float range;
    [SerializeField] int healthBar;
    [SerializeField] LayerMask ground;
    [SerializeField] protected GameObject attack;
-   [SerializeField] private Attack[] attacks;
-
+   [SerializeField] protected Attack[] attacks;
+   [SerializeField] protected float maxCoolDown;
 
    // -------------------------------------------------
    // Protected Variables
    // -------------------------------------------------
+   protected float coolDown = 0;
    protected int hitboxPriority = -1;
    protected float hitstun = 0;
-   protected int direction = 1;
+   protected bool facingLeft = true;
    protected Rigidbody2D rb;
    protected GameObject groundCheck;
    protected bool attacking;
    protected Transform target;
+
+   protected const int left = 1;
+   protected const int right = -1;
 
 
    // -------------------------------------------------
@@ -58,17 +63,34 @@ public abstract class Enemy : MonoBehaviour
       }
       rb = GetComponent<Rigidbody2D>();
    }
+
    public virtual void Update()
    {
-        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
-        var newColor = GetComponent<SpriteRenderer>().color;
-        newColor = new Color(newColor.r + Time.deltaTime, newColor.g + Time.deltaTime, newColor.b + Time.deltaTime);
-        GetComponent<SpriteRenderer>().color = newColor;
-         handleHitStun();
+      grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
+      handleHitStun();
+
+      if (coolDown > 0)
+      {
+         coolDown -= Time.deltaTime;
+      }
+
+      var newColor = GetComponent<SpriteRenderer>().color;
+      newColor = new Color(newColor.r + Time.deltaTime, newColor.g + Time.deltaTime, newColor.b + Time.deltaTime);
+      GetComponent<SpriteRenderer>().color = newColor;
    }
+
    public virtual void FixedUpdate()
    {
       attacking = CheckAttacking();
+
+      if (state == State.active)
+      {
+         Active();
+      }
+      else if (state == State.idle)
+      {
+         Idle();
+      }
    }
 
 
@@ -84,6 +106,7 @@ public abstract class Enemy : MonoBehaviour
          if (hitbox.priority > this.hitboxPriority)
          {
             this.hitboxPriority = hitbox.priority;
+            HaltAttacks();
 
             this.hitstun = hitbox.hitstun;
             this.state = State.hitStun;
@@ -92,7 +115,7 @@ public abstract class Enemy : MonoBehaviour
             float direction = collision.transform.parent.parent.localScale.x * -1;
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
-            
+
             // effects
             GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
@@ -101,13 +124,25 @@ public abstract class Enemy : MonoBehaviour
             collision.gameObject.GetComponent<ParticleSystem>().Play();
 
             this.health -= hitbox.damage;
-            if(this.health <= 0) {
+            if (this.health <= 0)
+            {
                Die();
             }
          }
       }
    }
-   
+
+   private void HaltAttacks()
+   {
+      foreach (Transform t in transform)
+      {
+         if (t.CompareTag("EnemyAttack"))
+         {
+            Destroy(t.gameObject);
+         }
+      }
+   }
+
    private void ResetTimeScale()
    {
       Time.timeScale = 1;
@@ -198,7 +233,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    protected float TargetDirection()
    {
-      return this.transform.position.x - target.transform.position.x;
+      return Mathf.Sign(this.transform.position.x - target.transform.position.x);
    }
 
    protected float TargetDist()
@@ -206,11 +241,20 @@ public abstract class Enemy : MonoBehaviour
       return Vector2.Distance(this.transform.position, target.position);
    }
 
+   protected bool InRange()
+   {
+      return TargetDist() <= this.range;
+   }
+
 
    // -------------------------------------------------
-   // Death
+   // States
    // -------------------------------------------------
-   private void Die() 
+   protected virtual void Active() { }
+
+   protected virtual void Idle() { }
+
+   protected virtual void Die()
    {
       Debug.Log("Enemy Killed");
    }

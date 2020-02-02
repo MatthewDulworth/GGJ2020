@@ -21,6 +21,7 @@ public abstract class Enemy : MonoBehaviour
    protected int direction = 1;
    protected Rigidbody2D rb;
    protected GameObject groundCheck;
+   protected bool attacking;
 
 
    // -------------------------------------------------
@@ -30,7 +31,11 @@ public abstract class Enemy : MonoBehaviour
    protected State state;
    protected enum State
    {
-      hitStun, dead, active, attacking, inactive
+      hitStun,
+      landStun,
+      dead,
+      active,
+      idle
    }
 
 
@@ -55,14 +60,6 @@ public abstract class Enemy : MonoBehaviour
       handleHitStun();
    }
 
-
-   // -------------------------------------------------
-   // public methods
-   // -------------------------------------------------
-   public abstract void handleMovement();
-   public abstract void handleAttacks();
-
-
    // -------------------------------------------------
    // Handle Hits
    // -------------------------------------------------
@@ -70,31 +67,31 @@ public abstract class Enemy : MonoBehaviour
    {
       if (collision.gameObject.tag == "Attack")
       {
-             Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
+         Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
-             if (hitbox.priority > this.hitboxPriority)
-             {
-                this.hitboxPriority = hitbox.priority;
+         if (hitbox.priority > this.hitboxPriority)
+         {
+            this.hitboxPriority = hitbox.priority;
 
-                this.hitstun = hitbox.hitstun;
-                this.state = State.hitStun;
+            this.hitstun = hitbox.hitstun;
+            this.state = State.hitStun;
 
-                float direction = collision.transform.parent.parent.localScale.x * -1;
-                rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
-                StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+            float direction = collision.transform.parent.parent.localScale.x * -1;
+            rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
+            StartCoroutine(ResetPriority(hitbox.hitboxDuration));
 
-                GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
-                Time.timeScale = 1 - hitbox.shakeIntensity;
-                Invoke("ResetTimeScale", .3f);
-                GetComponent<AudioSource>().Play();
-                collision.gameObject.GetComponent<ParticleSystem>().Play();
+            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+            Time.timeScale = 1 - hitbox.shakeIntensity;
+            Invoke("ResetTimeScale", .3f);
+            GetComponent<AudioSource>().Play();
+            collision.gameObject.GetComponent<ParticleSystem>().Play();
          }
       }
    }
-    private void ResetTimeScale()
-    {
-        Time.timeScale = 1;
-    }
+   private void ResetTimeScale()
+   {
+      Time.timeScale = 1;
+   }
 
    IEnumerator ResetPriority(float delay)
    {
@@ -120,10 +117,19 @@ public abstract class Enemy : MonoBehaviour
 
          if (hitstun <= 0 && grounded)
          {
-            state = State.active;
+            state = State.landStun;
+            Invoke("Ready", .2f);
          }
       }
    }
+
+   private void Ready() 
+   {
+      if(state == State.landStun) {
+         state = State.active;
+      }
+   }
+
 
 
    // -------------------------------------------------

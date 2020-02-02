@@ -20,23 +20,25 @@ public class AttackController : MonoBehaviour
       if (startupTime <= 0)
       {
          maxHitboxDuration -= Time.deltaTime;
-         if (maxHitboxDuration <= 0)
+
+
+         // kill aerials on landing
+         if (isAerial && transform.parent.gameObject.GetComponent<PlayerController>().grounded)
+         {
+            Die();
+         }
+         else if (maxHitboxDuration <= 0)
          {
             // handle endLag
             endLag -= Time.deltaTime;
             if (endLag <= 0)
             {
                Die();
-            } 
-
-            // kill aerials on landing
-            if(isAerial && transform.parent.gameObject.GetComponent<PlayerController>().grounded) {
-               print("AirDeath");
-               Die();
             }
          }
       }
    }
+
    //Assigns all values in controller through attack scriptable
    public void SetAttack(Attack inAttack)
    {

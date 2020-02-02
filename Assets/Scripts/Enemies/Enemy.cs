@@ -79,7 +79,7 @@ public abstract class Enemy : MonoBehaviour
             this.hitstun = hitbox.hitstun;
             this.state = State.hitStun;
 
-            float direction = collision.transform.parent.parent.localScale.x;
+            float direction = collision.transform.parent.parent.localScale.x * -1;
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
          }
       }
@@ -87,7 +87,7 @@ public abstract class Enemy : MonoBehaviour
 
    private Vector2 getHitVector(float magnitude, float angle, float direction)
    {
-      angle *= -Mathf.Deg2Rad;
+      angle *= Mathf.Deg2Rad;
       return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude;
    }
 

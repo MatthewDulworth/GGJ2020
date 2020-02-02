@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    // Variables 
    // -------------------------------------------------
-   private PlayerState state = PlayerState.alive;
+   private State state = State.alive;
    private AttackMachine attackMachine;
    private ControlScheme cntrlSchm;
 
@@ -49,7 +49,11 @@ public class PlayerController : MonoBehaviour
    private bool attacking;
    public Attack[] attacks;
 
-   public enum PlayerState
+   // Hit Vars
+   private int hitboxPriority = -1;
+   private float hitstun = 0;
+
+   public enum State
    {
       alive, dead, disabled
    }
@@ -96,8 +100,30 @@ public class PlayerController : MonoBehaviour
    private void OnTriggerEnter2D(Collider2D collision)
    {
       if(collision.gameObject.tag == "EnemyAttack") {
-         
+         Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
+
+         if (hitbox.priority > this.hitboxPriority)
+         {
+            this.hitboxPriority = hitbox.priority;
+            // this.hitstun = hitbox.hitstun;
+            // this.state = State.disabled;
+            float direction = collision.transform.parent.parent.localScale.x * -1;
+            rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
+            StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+         }
       }
+   }
+
+   IEnumerator ResetPriority(float delay)
+   {
+      yield return new WaitForSeconds(delay);
+      hitboxPriority = -1;
+   }
+
+   private Vector2 getHitVector(float magnitude, float angle, float direction)
+   {
+      angle *= Mathf.Deg2Rad;
+      return new Vector2(Mathf.Cos(angle) * direction, Mathf.Sin(angle)) * magnitude;
    }
 
 
@@ -106,7 +132,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    private void FixedUpdate()
    {
-      if (state == PlayerState.alive)
+      if (state == State.alive)
       {
          attacking = CheckAttacking();
          if (!rolling)

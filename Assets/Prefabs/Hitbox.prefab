@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hitbox
       objectReference: {fileID: 0}
+    - target: {fileID: 2365082775559049676, guid: ae85d228d6bc9454fad59988a11a41fd,
+        type: 3}
+      propertyPath: m_TagString
+      value: Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 3184293168130250240, guid: ae85d228d6bc9454fad59988a11a41fd,
         type: 3}
       propertyPath: m_LocalPosition.x

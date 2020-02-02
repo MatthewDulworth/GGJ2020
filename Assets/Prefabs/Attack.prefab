@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Attack
       objectReference: {fileID: 0}
+    - target: {fileID: 2604964227065109363, guid: 06a84eb3641034fae9c67c15699713ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 2604964227065109361, guid: 06a84eb3641034fae9c67c15699713ab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,5 +72,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2604964227065109362, guid: 06a84eb3641034fae9c67c15699713ab,
+        type: 3}
+      propertyPath: hitbox
+      value: 
+      objectReference: {fileID: 2758502966042996912, guid: 7d59ef55ab588524ba5be3a4506bb31d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06a84eb3641034fae9c67c15699713ab, type: 3}

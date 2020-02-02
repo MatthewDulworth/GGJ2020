@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: E_Jab
   m_EditorClassIdentifier: 
   startupTime: 0
-  endLag: 0
+  endLag: 0.2
   invincible: 0
-  hitboxes: []
+  hitboxes:
+  - {fileID: 11400000, guid: 6f5188ceb488f4d65979f2c581d43de2, type: 2}
+  - {fileID: 11400000, guid: 35186c4df1e844df7bef5feabf1d8bb9, type: 2}

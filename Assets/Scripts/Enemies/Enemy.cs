@@ -89,7 +89,7 @@ public abstract class Enemy : MonoBehaviour
    IEnumerator ResetPriority(float delay)
    {
       yield return new WaitForSeconds(delay);
-      this.hitboxPriority = -1;
+      hitboxPriority = -1;
    }
 
    private Vector2 getHitVector(float magnitude, float angle, float direction)

@@ -30,9 +30,9 @@ public class AttackMachine
    // -------------------------------------------------
    // Update
    // -------------------------------------------------
-   public void Update(bool grounded)
+   public void Update(bool grounded, bool attacking)
    {
-      this.Attacking = false;
+      this.Attacking = attacking;
       this.IsAerial = false;
       // bool attackPressed = Input.GetAxis(controlScheme.AttackAxis) > 0;
       bool attackPressed = Input.GetKeyDown(KeyCode.J);
@@ -87,7 +87,7 @@ public class AttackMachine
       }
       else if (horizontal)
       {
-         UpdateAttack("Jab");
+         UpdateAttack("Fair");
       }
       else
       {

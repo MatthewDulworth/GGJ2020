@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3257065a7b794f41a7ae2b8ace7a55c, type: 3}
-  m_Name: Nair HB 1
+  m_Name: Fair 2
   m_EditorClassIdentifier: 
   delay: 0
-  knockbackAngle: 65
-  knockback: 7
-  priority: 1
+  knockbackAngle: 10
+  knockback: 8
+  priority: 2
   hitstun: 1
-  hitboxDuration: 0.1
-  scale: {x: 1, y: 1.5}
-  offset: {x: -0.68, y: -0.135}
+  hitboxDuration: 2
+  scale: {x: 0.8, y: 0.8}
+  offset: {x: -0.8, y: -0.044}

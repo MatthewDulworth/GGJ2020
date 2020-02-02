@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    public void CheckAttack()
    {
-      attackMachine.Update(grounded);
+      attackMachine.Update(grounded, CheckAttacking());
 
       if (attackMachine.Attacking)
       {
@@ -254,7 +254,7 @@ public class PlayerController : MonoBehaviour
    }
 
    //Is the player attacking?
-   private bool CheckAttacking()
+   public bool CheckAttacking()
    {
       foreach (Transform e in transform)
       {

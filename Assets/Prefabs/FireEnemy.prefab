@@ -283,5 +283,8 @@ MonoBehaviour:
   maxCoolDown: 1
   grounded: 0
   rangedCoolDownMax: 3
-  launchAngle: 60
+  launchAngle: -45
   launchForce: 10
+  ascendVelocity: 3
+  floatHeight: 3
+  landStun: 0.5

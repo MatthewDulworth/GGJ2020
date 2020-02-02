@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
       {
          Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
-         if (hitbox.priority > this.hitboxPriority)
+         if (hitbox.priority > this.hitboxPriority && !rolling)
          {
             this.hitboxPriority = hitbox.priority;
 

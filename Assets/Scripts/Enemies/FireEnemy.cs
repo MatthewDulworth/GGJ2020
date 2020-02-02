@@ -31,6 +31,7 @@ public class FireEnemy : Enemy
    public override void Start()
    {
       base.Start();
+      invincible = true;
       fireballs = new List<AttackController>();
       fireState = FireState.descending;
       this.floatHeight = this.transform.position.y + this.floatHeight;
@@ -70,7 +71,7 @@ public class FireEnemy : Enemy
    // -------------------------------------------------
    protected override void OnTriggerEnter2D(Collider2D collision)
    {
-      if (collision.gameObject.tag == "Attack")
+      if (collision.gameObject.tag == "Attack" && !invincible)
       {
          Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
@@ -98,7 +99,7 @@ public class FireEnemy : Enemy
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
 
             // effects
-            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+//            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
             Invoke("ResetTimeScale", .3f);
             GetComponent<AudioSource>().Play();

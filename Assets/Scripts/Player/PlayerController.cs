@@ -366,16 +366,16 @@ public class PlayerController : MonoBehaviour
    // Will include death animation, effects, probably slow down and sound effect
    public void Die()
    {
-      //   if (!GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover)
-      //   {
-      //       Debug.Log("Player Death");
-      //       GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover = true;
-      //       GameObject.Find("Game Over Screen").GetComponent<MoveTowards>().enabled = true;
-      //       GameObject.Find("Game Over Text").GetComponent<Text>().text += GameObject.Find("Spawn Controller").GetComponent<SpawnController>().currentWave;
-      //       state = State.dead;
-      //       anim.speed = 0;
-      //       runSound.Stop();
-      //   }
+        if (!GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover)
+        {
+            Debug.Log("Player Death");
+            GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover = true;
+            GameObject.Find("Game Over Screen").GetComponent<MoveTowards>().enabled = true;
+            GameObject.Find("Game Over Text").GetComponent<Text>().text += GameObject.Find("Spawn Controller").GetComponent<SpawnController>().currentWave;
+            state = State.dead;
+            anim.speed = 0;
+            runSound.Stop();
+        }
    }
 }
 

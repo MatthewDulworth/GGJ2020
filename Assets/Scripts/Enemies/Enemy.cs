@@ -27,11 +27,12 @@ public abstract class Enemy : MonoBehaviour
    protected GameObject groundCheck;
    protected bool attacking;
    protected Transform target;
+   protected bool invincible = true;
 
    protected const int left = 1;
    protected const int right = -1;
 
-    protected GameObject healthBar;
+   protected GameObject healthBar;
 
    // -------------------------------------------------
    // States
@@ -53,6 +54,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    public virtual void Start()
    {
+      invincible = true;
       totalHealth = health;
       target = FindObjectOfType<PlayerController>().transform;
       state = State.idle;
@@ -106,7 +108,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    protected virtual void OnTriggerEnter2D(Collider2D collision)
    {
-      if (collision.gameObject.tag == "Attack")
+      if (collision.gameObject.tag == "Attack" && !invincible)
       {
          Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
@@ -286,6 +288,7 @@ public abstract class Enemy : MonoBehaviour
    {
       yield return new WaitForSeconds(delay);
       state = State.active;
+      invincible = false;
    }
 
    // -------------------------------------------------

@@ -11,7 +11,8 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected float walkSpeed;
    [SerializeField] int healthBar;
    [SerializeField] LayerMask ground;
-   [SerializeField] protected GameObject attack; 
+   [SerializeField] protected GameObject attack;
+   [SerializeField] private Attack[] attacks;
 
 
    // -------------------------------------------------
@@ -61,6 +62,10 @@ public abstract class Enemy : MonoBehaviour
    {
       grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
       handleHitStun();
+   }
+   public virtual void FixedUpdate()
+   {
+      attacking = CheckAttacking();
    }
 
    // -------------------------------------------------
@@ -126,17 +131,55 @@ public abstract class Enemy : MonoBehaviour
       }
    }
 
-   private void Ready() 
+   private void Ready()
    {
-      if(state == State.landStun) {
+      if (state == State.landStun)
+      {
          state = State.active;
       }
    }
 
-   public void Flip()
+   protected void Flip()
    {
       transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
    }
+
+
+   // -------------------------------------------------
+   // Attacks 
+   // -------------------------------------------------
+   protected Attack FindAttack(string name)
+   {
+      foreach (Attack attack in attacks)
+      {
+         if (attack.name.Equals(name))
+         {
+            return attack;
+         }
+      }
+      return null;
+   }
+
+   public bool CheckAttacking()
+   {
+      foreach (Transform e in transform)
+      {
+         if (e.tag == "Attack")
+         {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   public void DoAttack(string name)
+   {
+      AttackController spawnedAttack = Instantiate(this.attack, this.transform).GetComponent<AttackController>();
+      spawnedAttack.isAerial = false;
+      spawnedAttack.SetAttack(FindAttack(name));
+      attacking = true;
+   }
+
 
    // -------------------------------------------------
    // Get / Set 

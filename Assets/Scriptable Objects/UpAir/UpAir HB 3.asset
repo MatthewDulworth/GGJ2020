@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3257065a7b794f41a7ae2b8ace7a55c, type: 3}
   m_Name: UpAir HB 3
   m_EditorClassIdentifier: 
-  delay: 0.1
+  delay: 0.14
   knockbackAngle: 85
   knockback: 8
   priority: 1
   hitstun: 0.2
-  hitboxDuration: 0.1
+  hitboxDuration: 0.2
   scale: {x: 0.7, y: 0.7}
   offset: {x: -0.28, y: 0.85}
+  shakeDuration: 0.2
+  shakeIntensity: 0.2

@@ -19,6 +19,7 @@ public class HitboxController : MonoBehaviour
         if(hitboxDuration <= 0)
         {
             GetComponent<Collider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
         }
     }
     public void SetHitbox(Hitbox hb)

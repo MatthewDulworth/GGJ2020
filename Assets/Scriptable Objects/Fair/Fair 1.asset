@@ -17,6 +17,8 @@ MonoBehaviour:
   knockback: 8
   priority: 1
   hitstun: 1
-  hitboxDuration: 1.5
+  hitboxDuration: 0.3
   scale: {x: 0.8, y: 0.8}
   offset: {x: -0.244, y: -0.044}
+  shakeDuration: 0.1
+  shakeIntensity: 0.2

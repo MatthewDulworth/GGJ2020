@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jab
   m_EditorClassIdentifier: 
   startupTime: 0
-  endLag: 0.1
+  endLag: 0.2
   invincible: 0
   hitboxes:
   - {fileID: 11400000, guid: 839c3b3e83bcf91469e9b10adc570f18, type: 2}

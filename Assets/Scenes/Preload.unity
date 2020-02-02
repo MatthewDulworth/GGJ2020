@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 1402822808}
   - component: {fileID: 1402822807}
   - component: {fileID: 1402822809}
+  - component: {fileID: 1402822810}
   m_Layer: 0
   m_Name: Preloaded
   m_TagString: Untagged
@@ -397,6 +398,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1402822810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402822802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd58977123a46e545893b9a3e5e10fc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.2
+  decay: 1
+  screenFlash: {fileID: 6845914234158523645, guid: 41e15fda0b9472745b3a3941e51f9eac,
+    type: 3}
+  flashSpeed: 2
+  flashDuration: 0.3
+  fadeSpeed: 10
+  maxFlashSize: 1000
 --- !u!1 &1470418868
 GameObject:
   m_ObjectHideFlags: 0

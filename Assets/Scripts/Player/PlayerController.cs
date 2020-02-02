@@ -246,6 +246,7 @@ public class PlayerController : MonoBehaviour
       if (attackMachine.Attacking)
       {
          attacking = true;
+            GetComponent<AudioSource>().Play();
          AttackController spawnedAttack = Instantiate(attack, transform).GetComponent<AttackController>();
          spawnedAttack.isAerial = attackMachine.IsAerial;
          spawnedAttack.SetAttack(attackMachine.CurrentAttack);

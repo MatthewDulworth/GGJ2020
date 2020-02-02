@@ -31,5 +31,20 @@ public class ButtonController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         LoadScene(name);
     }
-    
+    public void TriggerScreen(GameObject screen)
+    {
+        screen.SetActive(!screen.activeInHierarchy);
+    }
+    public void TriggerPause(GameObject pauseScreen)
+    {
+        pauseScreen.SetActive(!pauseScreen.activeInHierarchy);
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+        else if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
+    }
 }

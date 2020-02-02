@@ -28,4 +28,7 @@ public class Hitbox : ScriptableObject
 
     //what position relative to the player the hitbox will be instantiated
     public Vector2 offset;
+
+    public float shakeDuration;
+    public float shakeIntensity;
 }

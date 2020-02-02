@@ -70,21 +70,31 @@ public abstract class Enemy : MonoBehaviour
    {
       if (collision.gameObject.tag == "Attack")
       {
-         Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
+             Hitbox hitbox = collision.gameObject.GetComponent<HitboxController>().hitbox;
 
-         if (hitbox.priority > this.hitboxPriority)
-         {
-            this.hitboxPriority = hitbox.priority;
+             if (hitbox.priority > this.hitboxPriority)
+             {
+                this.hitboxPriority = hitbox.priority;
 
-            this.hitstun = hitbox.hitstun;
-            this.state = State.hitStun;
+                this.hitstun = hitbox.hitstun;
+                this.state = State.hitStun;
 
-            float direction = collision.transform.parent.parent.localScale.x * -1;
-            rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
-            StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+                float direction = collision.transform.parent.parent.localScale.x * -1;
+                rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
+                StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+
+                GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+                Time.timeScale = 1 - hitbox.shakeIntensity;
+                Invoke("ResetTimeScale", .3f);
+                GetComponent<AudioSource>().Play();
+                collision.gameObject.GetComponent<ParticleSystem>().Play();
          }
       }
    }
+    private void ResetTimeScale()
+    {
+        Time.timeScale = 1;
+    }
 
    IEnumerator ResetPriority(float delay)
    {

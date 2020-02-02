@@ -16,8 +16,8 @@ public class ParticleEffect : MonoBehaviour
     void FixedUpdate()
     {
         Color newColor = GetComponent<SpriteRenderer>().color;
-        newColor.a -= Time.deltaTime;
+        newColor.a -= Time.deltaTime * 2;
         GetComponent<SpriteRenderer>().color = newColor;
-        transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime, transform.localScale.y - Time.deltaTime, 1);
+        transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime * 2, transform.localScale.y - Time.deltaTime * 2, 1);
     }
 }

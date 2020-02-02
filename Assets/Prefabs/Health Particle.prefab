@@ -93,4 +93,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cfd7df47e1b8f4fabd5c34906cf3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decay: 2
+  decay: 1
+  lifetime: 1

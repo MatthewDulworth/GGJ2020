@@ -15,6 +15,7 @@ public class FireEnemy : Enemy
    [SerializeField] float landStun = 0.5f;
    private float rangedCoolDown;
    private List<AttackController> fireballs;
+ 
 
    private FireState fireState;
    private enum FireState

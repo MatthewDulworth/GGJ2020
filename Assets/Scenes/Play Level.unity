@@ -1370,25 +1370,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '
-
-    Patients under your care have been going berserk. Luckily, you know the best medicine...IS
-    YOUR FISTS!!
-
-
-
-    WASD  -  move
-
-
-    Space  -  Jump
-
-
-    j  -  attack
-
-
-    shift  -  roll
-
-'
+  m_Text: "\nPatients under your care have been going berserk. Luckily, you know the
+    best medicine...IS YOUR FISTS!!\n\n\nWASD  -  move\n\nSpace  -  Jump\n\nj  -  attack\n\nleft
+    shift  -  invincible roll \n"
 --- !u!222 &756350731
 CanvasRenderer:
   m_ObjectHideFlags: 0

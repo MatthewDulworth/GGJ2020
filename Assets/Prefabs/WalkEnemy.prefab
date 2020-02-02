@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  walkSpeed: 3
+  walkSpeed: 1.5
   range: 1
   healthBar: 0
   ground:
@@ -280,5 +280,5 @@ MonoBehaviour:
   attack: {fileID: 2604964227065109363, guid: 06a84eb3641034fae9c67c15699713ab, type: 3}
   attacks:
   - {fileID: 11400000, guid: 73f91df1aa26b4cacab2434265f04c81, type: 2}
-  maxCoolDown: 1
+  maxCoolDown: 2
   grounded: 0

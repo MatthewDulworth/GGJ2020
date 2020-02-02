@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0
   knockbackAngle: 45
-  knockback: 5
+  knockback: 7
   priority: 0
   hitstun: 0.1
-  hitboxDuration: 0.4
-  scale: {x: 0.72, y: 1.32}
+  hitboxDuration: 0.3
+  scale: {x: 0.9, y: 1.32}
   offset: {x: -0.64, y: 0.18}
   damage: 1
-  shakeDuration: 0.1
-  shakeIntensity: 0.02
+  shakeDuration: 0.3
+  shakeIntensity: 0.3

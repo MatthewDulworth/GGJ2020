@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     // Run sound
     private AudioSource runSound;
+    private AudioSource hitSound;
    public enum State
    {
       alive, dead, disabled
@@ -87,7 +88,11 @@ public class PlayerController : MonoBehaviour
             {
                 runSound = child.gameObject.GetComponent<AudioSource>();
             }
-      }
+            if (child.name == "Hit Sound")
+            {
+                hitSound = child.gameObject.GetComponent<AudioSource>();
+            }
+        }
       anim = GetComponent<Animator>();
    }
 
@@ -116,16 +121,24 @@ public class PlayerController : MonoBehaviour
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
 
-            // damage
-            this.health -= hitbox.damage;
+            GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
+            Time.timeScale = 1 - hitbox.shakeIntensity;
+            Invoke("ResetTimeScale", .2f);
+                hitSound.Play();
+                collision.gameObject.GetComponent<ParticleSystem>().Play();
+                // damage
+                this.health -= hitbox.damage;
             if(this.health <= 0) {
                Die();
             }
          }
       }
    }
-
-   IEnumerator ResetPriority(float delay)
+    private void ResetTimeScale()
+    {
+        Time.timeScale = 1;
+    }
+    IEnumerator ResetPriority(float delay)
    {
       yield return new WaitForSeconds(delay);
       hitboxPriority = -1;
@@ -319,13 +332,16 @@ public class PlayerController : MonoBehaviour
    // Will include death animation, effects, probably slow down and sound effect
    public void Die()
    {
-      Debug.Log("Player Death");
-        GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover = true;
-        GameObject.Find("Game Over Screen").GetComponent<MoveTowards>().enabled = true;
-        GameObject.Find("Game Over Text").GetComponent<Text>().text += GameObject.Find("Spawn Controller").GetComponent<SpawnController>().currentWave;
-        state = State.dead;
-        anim.speed = 0;
-        runSound.Stop();
+        if (!GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover)
+        {
+            Debug.Log("Player Death");
+            GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover = true;
+            GameObject.Find("Game Over Screen").GetComponent<MoveTowards>().enabled = true;
+            GameObject.Find("Game Over Text").GetComponent<Text>().text += GameObject.Find("Spawn Controller").GetComponent<SpawnController>().currentWave;
+            state = State.dead;
+            anim.speed = 0;
+            runSound.Stop();
+        }
    }
 }
 

@@ -53,7 +53,8 @@ public class SpawnController : MonoBehaviour
 
         waveClearText.SetActive(true);
         waveClearText.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1500, 0);
-        waveClearText.GetComponent<MoveTowards>().dest = GameObject.Find("Center").transform;
+        var dest = GameObject.Find("Center");
+        waveClearText.GetComponent<MoveTowards>().dest = dest.transform;
         yield return new WaitForSeconds(.1f);
         GameObject.FindObjectOfType<EffectsController>().ScreenFlash(Vector2.zero);
         yield return new WaitForSeconds(.8f);
@@ -76,10 +77,13 @@ public class SpawnController : MonoBehaviour
             case 2:
                 startSpawnRate += normalIncrementRate;
                 timeBtwnWaves++;
+                maxEnemiesAllowed++;
                 break;
             case 3:
                 startSpawnRate += normalIncrementRate;
                 timeBtwnWaves++;
+                break;
+            case 4:
                 maxEnemiesAllowed++;
                 break;
             case 5:

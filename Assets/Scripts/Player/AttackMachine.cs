@@ -36,7 +36,9 @@ public class AttackMachine
       this.IsAerial = false;
       // bool attackPressed = Input.GetAxis(controlScheme.AttackAxis) > 0;
       bool attackPressed = Input.GetKeyDown(KeyCode.J);
+      bool horizontal = (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D));
       float vertical = Input.GetAxis(controlScheme.VerticalAxis);
+      
 
       if (grounded && attackPressed)
       {
@@ -45,7 +47,7 @@ public class AttackMachine
       }
       else if (!grounded && attackPressed)
       {
-         HandleAerials(vertical);
+         HandleAerials(vertical, horizontal);
          this.Attacking = true;
       }
    }
@@ -68,11 +70,11 @@ public class AttackMachine
          UpdateAttack("Jab");
       }
    }
-   
+
    // -------------------------------------------------
    // Handle Aerials
    // -------------------------------------------------
-   private void HandleAerials(float vertical)
+   private void HandleAerials(float vertical, bool horizontal)
    {
       this.IsAerial = true;
       if (vertical > 0)
@@ -82,6 +84,10 @@ public class AttackMachine
       else if (vertical < 0)
       {
          UpdateAttack("DownAir");
+      }
+      else if (horizontal)
+      {
+         UpdateAttack("Jab");
       }
       else
       {

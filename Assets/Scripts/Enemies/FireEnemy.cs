@@ -20,7 +20,6 @@ public class FireEnemy : Enemy
    public override void Start()
    {
       base.Start();
-      this.state = State.active;
       fireballs = new List<AttackController>();
    }
 

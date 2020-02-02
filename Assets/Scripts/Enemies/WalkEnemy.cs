@@ -10,7 +10,6 @@ public class WalkEnemy : Enemy
    public override void Start()
    {
       base.Start();
-      this.state = State.active;
    }
    public override void Update()
    {

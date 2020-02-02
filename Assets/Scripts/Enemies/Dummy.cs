@@ -36,19 +36,11 @@ public class Dummy : Enemy
    // -------------------------------------------------
    private void Idle()
    {
-      if (grounded)
-      {
-
-      }
+   
    }
 
    private void Active()
    {
-      choiceTimer -= Time.deltaTime;
 
-      if(choiceTimer <= 0) {
-         choiceTimer = maxChoiceTime;
-         DoAttack("Jab");
-      }
    }
 }

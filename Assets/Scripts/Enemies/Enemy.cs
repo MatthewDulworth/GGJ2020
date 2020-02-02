@@ -68,6 +68,7 @@ public abstract class Enemy : MonoBehaviour
       attacking = CheckAttacking();
    }
 
+
    // -------------------------------------------------
    // Handle Hits
    // -------------------------------------------------
@@ -84,18 +85,26 @@ public abstract class Enemy : MonoBehaviour
             this.hitstun = hitbox.hitstun;
             this.state = State.hitStun;
 
+            // knockback
             float direction = collision.transform.parent.parent.localScale.x * -1;
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
-
+            
+            // effects
             GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
             Invoke("ResetTimeScale", .3f);
             GetComponent<AudioSource>().Play();
             collision.gameObject.GetComponent<ParticleSystem>().Play();
+
+            this.health -= hitbox.damage;
+            if(this.health <= 0) {
+               Die();
+            }
          }
       }
    }
+   
    private void ResetTimeScale()
    {
       Time.timeScale = 1;
@@ -180,6 +189,28 @@ public abstract class Enemy : MonoBehaviour
       attacking = true;
    }
 
+
+   // -------------------------------------------------
+   // Targeting
+   // -------------------------------------------------
+   protected float TargetDirection()
+   {
+      return this.transform.position.x - target.transform.position.x;
+   }
+
+   protected float TargetDist()
+   {
+      return Vector2.Distance(this.transform.position, target.position);
+   }
+
+
+   // -------------------------------------------------
+   // Death
+   // -------------------------------------------------
+   private void Die() 
+   {
+      Debug.Log("Enemy Killed");
+   }
 
    // -------------------------------------------------
    // Get / Set 

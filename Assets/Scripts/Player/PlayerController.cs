@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
    // -------------------------------------------------
    // Variables 
    // -------------------------------------------------
+   [SerializeField] private float health = 100;
    private State state = State.alive;
    private AttackMachine attackMachine;
    private ControlScheme cntrlSchm;
@@ -19,8 +20,7 @@ public class PlayerController : MonoBehaviour
 
    //Animation
    private Animator anim;
-   [SerializeField]
-   private float spriteFlipDelay;
+   [SerializeField] private float spriteFlipDelay;
 
    //Side Movement
    public float playerSpeed;
@@ -81,7 +81,6 @@ public class PlayerController : MonoBehaviour
          {
             groundCheck = child.gameObject;
          }
-
       }
       anim = GetComponent<Animator>();
    }
@@ -110,6 +109,12 @@ public class PlayerController : MonoBehaviour
             float direction = collision.transform.parent.parent.localScale.x * -1;
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
+
+            // damage
+            this.health -= hitbox.damage;
+            if(this.health <= 0) {
+               Die();
+            }
          }
       }
    }
@@ -303,7 +308,7 @@ public class PlayerController : MonoBehaviour
    // Will include death animation, effects, probably slow down and sound effect
    public void Die()
    {
-   
+      Debug.Log("Player Death");
    }
 }
 

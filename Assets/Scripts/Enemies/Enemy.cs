@@ -9,22 +9,27 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    [SerializeField] protected float health;
    [SerializeField] protected float walkSpeed;
+   [SerializeField] protected float range;
    [SerializeField] int healthBar;
    [SerializeField] LayerMask ground;
    [SerializeField] protected GameObject attack;
-   [SerializeField] private Attack[] attacks;
-
+   [SerializeField] protected Attack[] attacks;
+   [SerializeField] protected float maxCoolDown = 1f;
 
    // -------------------------------------------------
    // Protected Variables
    // -------------------------------------------------
+   protected float coolDown = 0;
    protected int hitboxPriority = -1;
    protected float hitstun = 0;
-   protected int direction = 1;
+   protected bool facingLeft = true;
    protected Rigidbody2D rb;
    protected GameObject groundCheck;
    protected bool attacking;
    protected Transform target;
+
+   protected const int left = 1;
+   protected const int right = -1;
 
 
    // -------------------------------------------------
@@ -62,10 +67,23 @@ public abstract class Enemy : MonoBehaviour
    {
       grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ground);
       handleHitStun();
+
+      if(coolDown > 0) {
+         coolDown -= Time.deltaTime;
+      }
    }
    public virtual void FixedUpdate()
    {
       attacking = CheckAttacking();
+
+      if(state == State.active) 
+      {
+         Active();
+      }
+      else if(state == State.idle) 
+      {
+         Idle();
+      }
    }
 
 
@@ -89,7 +107,7 @@ public abstract class Enemy : MonoBehaviour
             float direction = collision.transform.parent.parent.localScale.x * -1;
             rb.velocity = getHitVector(hitbox.knockback, hitbox.knockbackAngle, direction);
             StartCoroutine(ResetPriority(hitbox.hitboxDuration));
-            
+
             // effects
             GameObject.Find("Preloaded").GetComponent<EffectsController>().CameraShake(hitbox.shakeDuration, hitbox.shakeIntensity);
             Time.timeScale = 1 - hitbox.shakeIntensity;
@@ -98,13 +116,14 @@ public abstract class Enemy : MonoBehaviour
             collision.gameObject.GetComponent<ParticleSystem>().Play();
 
             this.health -= hitbox.damage;
-            if(this.health <= 0) {
+            if (this.health <= 0)
+            {
                Die();
             }
          }
       }
    }
-   
+
    private void ResetTimeScale()
    {
       Time.timeScale = 1;
@@ -153,7 +172,6 @@ public abstract class Enemy : MonoBehaviour
       transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
    }
 
-
    // -------------------------------------------------
    // Attacks 
    // -------------------------------------------------
@@ -195,7 +213,7 @@ public abstract class Enemy : MonoBehaviour
    // -------------------------------------------------
    protected float TargetDirection()
    {
-      return this.transform.position.x - target.transform.position.x;
+      return Mathf.Sign(this.transform.position.x - target.transform.position.x);
    }
 
    protected float TargetDist()
@@ -203,11 +221,20 @@ public abstract class Enemy : MonoBehaviour
       return Vector2.Distance(this.transform.position, target.position);
    }
 
+   protected bool InRange() 
+   {
+      return TargetDist() <= this.range;
+   }
+
 
    // -------------------------------------------------
-   // Death
+   // States
    // -------------------------------------------------
-   private void Die() 
+   protected virtual void Active() { }
+
+   protected virtual void Idle() { }
+
+   protected virtual void Die()
    {
       Debug.Log("Enemy Killed");
    }

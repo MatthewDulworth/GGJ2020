@@ -20,5 +20,6 @@ MonoBehaviour:
   hitboxDuration: 0.1
   scale: {x: 0.8, y: 0.8}
   offset: {x: -0.62, y: 0.18}
+  damage: 1
   shakeDuration: 0.1
   shakeIntensity: 0.02

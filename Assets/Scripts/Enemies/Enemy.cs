@@ -269,7 +269,11 @@ public abstract class Enemy : MonoBehaviour
 
    protected virtual void Die()
    {
+<<<<<<< HEAD
 
+=======
+        Destroy(gameObject);
+>>>>>>> 7e6eed8106292c71b40e950998862ca6bcae0e3a
    }
 
 

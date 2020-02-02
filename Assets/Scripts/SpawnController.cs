@@ -12,13 +12,14 @@ public class SpawnController : MonoBehaviour
     public float timeBtwnWaves;
     public float timeBetweenSpawns;
     private float timer;
-    private int currentWave = 1;
+    public int currentWave = 1;
     private int maxEnemiesAllowed = 1;
 
     public GameObject[] enemies;
     private List<GameObject> spawnableEnemies = new List<GameObject>();
     public GameObject waveClearText;
 
+    public bool gameover;
     private float elapsedTime;
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,7 @@ public class SpawnController : MonoBehaviour
 
         waveClearText.SetActive(true);
         waveClearText.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1500, 0);
-        waveClearText.GetComponent<MoveTowards>().dest = GameObject.Find("Wave Clear dest").transform;
+        waveClearText.GetComponent<MoveTowards>().dest = GameObject.Find("Center").transform;
         yield return new WaitForSeconds(.1f);
         GameObject.FindObjectOfType<EffectsController>().ScreenFlash(Vector2.zero);
         yield return new WaitForSeconds(.8f);

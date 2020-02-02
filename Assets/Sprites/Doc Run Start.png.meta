@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: b40785b18c70a9b479d91b7f53dfe824
+guid: e6480c4f598d76a44b6dd17641d508b3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5407910597077333061
-    second: Doc Idle_0
+      213: -5927880383843391812
+    second: Doc Run Start_0
   - first:
-      213: 4859147271264135491
-    second: Doc Idle_1
-  - first:
-      213: 224854208905794161
-    second: Doc Idle_2
-  - first:
-      213: 2476330816902558759
-    second: Doc Idle_3
+      213: -7126783085810901627
+    second: Doc Run Start_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -75,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -87,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -99,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -111,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,7 +117,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -134,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Doc Idle_0
+      name: Doc Run Start_0
       rect:
         serializedVersion: 2
         x: 0
@@ -148,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d07b6fa5719fe24183dcb457f48f73c
-      internalID: 5407910597077333061
+      spriteID: 4913f44fd3854e84aa9cc28e46a114d4
+      internalID: -5927880383843391812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doc Idle_1
+      name: Doc Run Start_1
       rect:
         serializedVersion: 2
         x: 256
@@ -169,50 +163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e01eb08ed2ed4c241b939642d382599e
-      internalID: 4859147271264135491
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doc Idle_2
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dcac34c804fc2b44f8b78a45b6892163
-      internalID: 224854208905794161
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doc Idle_3
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ae9a572592845046bb066ae5188aae7
-      internalID: 2476330816902558759
+      spriteID: 5b70777f1becf9d4eb85b9f1ddfaeeee
+      internalID: -7126783085810901627
       vertices: []
       indices: 
       edges: []

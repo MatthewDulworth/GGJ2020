@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3257065a7b794f41a7ae2b8ace7a55c, type: 3}
-  m_Name: Down Tilt HB 1
+  m_Name: UpAir HB 3
   m_EditorClassIdentifier: 
-  delay: 0
-  knockbackAngle: 100
-  knockback: 3
+  delay: 0.1
+  knockbackAngle: 85
+  knockback: 8
   priority: 1
-  hitstun: 0.5
-  hitboxDuration: 0.2
+  hitstun: 0.2
+  hitboxDuration: 0.1
   scale: {x: 0.7, y: 0.7}
-  offset: {x: -0.332, y: -0.332}
+  offset: {x: -0.28, y: 0.85}

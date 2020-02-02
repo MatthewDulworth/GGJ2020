@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0
   knockbackAngle: 255
-  knockback: 10
+  knockback: 15
   priority: 5
   hitstun: 2
   hitboxDuration: 0.3

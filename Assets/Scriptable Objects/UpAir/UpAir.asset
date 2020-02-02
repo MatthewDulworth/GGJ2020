@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942fef30f10bc614bb923ced4b93a524, type: 3}
   m_Name: UpAir
   m_EditorClassIdentifier: 
-  startupTime: 0
-  endLag: 0
+  startupTime: 0.1
+  endLag: 0.1
   invincible: 0
-  hitboxes: []
+  hitboxes:
+  - {fileID: 11400000, guid: ed5a7f39e2fde51409b08f9e7644fe9f, type: 2}
+  - {fileID: 11400000, guid: d7145ade608f286429cba0e30eeb3aa0, type: 2}
+  - {fileID: 11400000, guid: 83a771ddc9b03cd40b9dd8a1bf339435, type: 2}

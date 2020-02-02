@@ -105,13 +105,13 @@ SpriteRenderer:
   m_SortingLayerID: -646100159
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7213085864590221602, guid: 4a8a0efb5e660264a8b7c3e691e5e8b7,
+  m_Sprite: {fileID: 5407910597077333061, guid: b40785b18c70a9b479d91b7f53dfe824,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteFlipDelay: 0.13
-  playerSpeed: 40
+  playerSpeed: 60
   maxSpeedX: 5
   jumpForce: 7
   ground:

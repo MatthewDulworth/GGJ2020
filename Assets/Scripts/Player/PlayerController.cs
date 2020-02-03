@@ -373,7 +373,6 @@ public class PlayerController : MonoBehaviour
    {
       if (!GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover)
       {
-         Debug.Log("Player Death");
          GameObject.Find("Spawn Controller").GetComponent<SpawnController>().gameover = true;
          GameObject.Find("Game Over Screen").GetComponent<MoveTowards>().enabled = true;
          GameObject.Find("Game Over Text").GetComponent<Text>().text += GameObject.Find("Spawn Controller").GetComponent<SpawnController>().currentWave;

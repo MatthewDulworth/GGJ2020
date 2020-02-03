@@ -42,7 +42,6 @@ public class SpawnController : MonoBehaviour
         //Wave cleared!!!
         if(elapsedTime / timeBtwnWaves >= 1)
         {
-            print("Wave cleared!!!");
             StartCoroutine(WaveClearText());
             elapsedTime -= timeBtwnWaves;
             UpdateWave();
@@ -118,7 +117,6 @@ public class SpawnController : MonoBehaviour
         int spawnIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
         GameObject enemySpawned = spawnableEnemies[UnityEngine.Random.Range(0, spawnableEnemies.Count)];
         Instantiate(enemySpawned, spawnPoints[spawnIndex].transform.position, spawnPoints[spawnIndex].transform.rotation);
-        print("Spawned guy");
         elapsedTime += 1;
         return true;
     }

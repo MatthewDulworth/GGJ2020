@@ -42,7 +42,6 @@ public class FireEnemy : Enemy
    {
       base.Update();
       rangedCoolDown -= Time.deltaTime;
-      Debug.Log(this.fireState);
    }
 
    public override void FixedUpdate()
